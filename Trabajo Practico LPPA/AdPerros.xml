@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+	<Ad>
+		<ImageUrl>~/images/dance-dog.gif</ImageUrl>
+		<AlternateText>Not Found</AlternateText>
+		<Keyword>Perros</Keyword>
+		<Impressions>100</Impressions>
+	</Ad>
+	<Ad>
+		<ImageUrl>~/images/dog.gif</ImageUrl>
+		<AlternateText>Not Found</AlternateText>
+		<Keyword>Perros</Keyword>
+		<Impressions>100</Impressions>
+	</Ad>
+	<Ad>
+		<ImageUrl>~/images/pet-dog.gif</ImageUrl>
+		<AlternateText>Not Found</AlternateText>
+		<Keyword>Perros</Keyword>
+		<Impressions>100</Impressions>
+	</Ad>
+</Advertisements>

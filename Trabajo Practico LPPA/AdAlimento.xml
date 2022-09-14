@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+	<Ad>
+		<ImageUrl>~/images/portfolio-img1.jpg</ImageUrl>
+		<NavigateUrl>https://www.purina-latam.com/ar/proplan</NavigateUrl>
+		<AlternateText>Not Found</AlternateText>
+		<Keyword>Alimento</Keyword>
+		<Impressions>100</Impressions>
+	</Ad>
+	<Ad>
+		<ImageUrl>~/images/portfolio-img2.jpg</ImageUrl>
+		<NavigateUrl>https://www.royalcanin.com/ar</NavigateUrl>
+		<AlternateText>Not Found</AlternateText>
+		<Keyword>Alimento</Keyword>
+		<Impressions>100</Impressions>
+	</Ad>
+	<Ad>
+		<ImageUrl>~/images/portfolio-img3.jpg</ImageUrl>
+		<NavigateUrl>https://www.vitalcan.com/</NavigateUrl>
+		<AlternateText>Not Found</AlternateText>
+		<Keyword>Alimento</Keyword>
+		<Impressions>100</Impressions>
+	</Ad>
+	<Ad>
+		<ImageUrl>~/images/portfolio-img4.jpg</ImageUrl>
+		<NavigateUrl>https://www.eukanuba.com/ar</NavigateUrl>
+		<AlternateText>Not Found</AlternateText>
+		<Keyword>Alimento</Keyword>
+		<Impressions>100</Impressions>
+	</Ad>
+</Advertisements>
