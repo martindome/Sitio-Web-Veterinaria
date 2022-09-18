@@ -7,6 +7,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using BE;
 using BLL;
+using BE.Composite;
 
 namespace WebApp
 {
@@ -44,7 +45,7 @@ namespace WebApp
             {
                 Response.Redirect("Default.aspx");
             }
-
+            ListBox1.Items.Clear();
             foreach (Accion_BE accion in usuarioRespuesta.TipoUsuario.listaAcciones)
             {
                 ListBox1.Items.Add(accion.detalle);
@@ -68,7 +69,6 @@ namespace WebApp
             //Label3.Text = "Usuario: ";
             //Button2.Visible = false;
             this.llenarGrid();
-
         }
 
         protected void Button3_Click(object sender, EventArgs e)

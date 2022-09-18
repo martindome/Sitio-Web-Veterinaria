@@ -11,16 +11,16 @@ namespace WebApp
 {
 
 
-    public partial class Productos
+    public partial class Compra
     {
 
         /// <summary>
-        /// Control productList.
+        /// Control IdVenta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView productList;
+        protected global::System.Web.UI.WebControls.Label IdVenta;
     }
 }

@@ -107,8 +107,13 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Admin.aspx" />
+    <Content Include="AgregarAlCarrito.aspx" />
     <Content Include="BackupRestore.aspx" />
     <Content Include="Carrito.aspx" />
+    <Content Include="CatalogoImagenes\Collar.jpg" />
+    <Content Include="CatalogoImagenes\Comida.jpg" />
+    <Content Include="CatalogoImagenes\Moises.jpg" />
+    <Content Include="Compra.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -173,6 +178,13 @@
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AgregarAlCarrito.aspx.cs">
+      <DependentUpon>AgregarAlCarrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarAlCarrito.aspx.designer.cs">
+      <DependentUpon>AgregarAlCarrito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -195,6 +207,13 @@
     </Compile>
     <Compile Include="Carrito.aspx.designer.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compra.aspx.cs">
+      <DependentUpon>Compra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compra.aspx.designer.cs">
+      <DependentUpon>Compra.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>

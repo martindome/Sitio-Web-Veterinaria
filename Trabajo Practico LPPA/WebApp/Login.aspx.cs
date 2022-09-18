@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Text;
 using BLL;
 using BE;
+using BE.Composite;
 
 
 namespace WebApp
@@ -36,7 +37,7 @@ namespace WebApp
                 usuarioBE = usuarioBLL.Verificar_Usuario(TextBoxUsername.Text, TextBoxPassword.Text);
                 if (!string.IsNullOrEmpty(usuarioBE.Usuario))
                 {
-                    //Trae el perfil del usuario de la base
+                    //Trae el perfil del usuario de la base (con composite)
                     usuarioBE.TipoUsuario.listaAcciones = usuarioBLL.Buscar_Acciones(usuarioBE.TipoUsuario.id);
                     //Bloqueado se pone 0
                     usuarioBLL.blanquear_password(TextBoxUsername.Text);

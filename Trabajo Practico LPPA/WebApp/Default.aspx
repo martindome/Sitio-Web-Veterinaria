@@ -8,13 +8,4 @@
         <p><a href="Productos.aspx" class="btn btn-primary btn-lg">Comprar ahora</a></p>
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2 id="Admin-Titulo">Consola de administrador</h2>
-            <p>
-                <a class="btn btn-default" href="Admin.aspx">Entrar</a>
-            </p>
-        </div>
-    </div>
-
 </asp:Content>

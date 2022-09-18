@@ -9,7 +9,7 @@
         Las acciones que el usuario puede realizar son:<br />
         <br />
         <div style="margin-left: 80px">
-        <asp:ListBox ID="ListBox1" runat="server" CssClass="list-group-item"></asp:ListBox>
+        <asp:ListBox ID="ListBox1" runat="server" class="list-group" BackColor="Black" CssClass="list-group"></asp:ListBox>
     </div>
     </div>
     
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div style="margin-left: 80px">
-            <asp:ListBox ID="ListBox2" runat="server" Height="105px" Width="209px" BackColor="Black"></asp:ListBox>
+            <asp:ListBox ID="ListBox2" runat="server" Height="105px" Width="209px" class="list-group" BackColor="Black" CssClass="list-group"></asp:ListBox>
             <br />
             <br />
             <asp:Button ID="Button4" runat="server" Height="23px" OnClick="Button4_Click" Text="Desbloquear" Width="168px" ForeColor="Black" />         

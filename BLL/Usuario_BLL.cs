@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DAL;
 using BE;
+using BE.Composite;
 
 
 
@@ -17,7 +18,7 @@ namespace BLL
             return mapper.loguear(usuario, contraseña);
         }
 
-        public List<Accion_BE> Buscar_Acciones(int id_tipousuario)
+        public List<Compuesto_BE> Buscar_Acciones(int id_tipousuario)
         {
            return mapper.Buscar_Acciones(id_tipousuario);
         }
