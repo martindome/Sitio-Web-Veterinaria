@@ -55,6 +55,8 @@
                         <li id="about" runat="server"><a runat="server" href="~/About">Acerca de</a></li>
                         <li id="contact" runat="server"><a runat="server" href="~/Contact">Contacto</a></li>
                         <li id="productos" runat="server"><a runat="server" href="~/Productos">Productos</a></li>
+                        <li id="Stock" runat="server"><a runat="server" href="~/Stock">Stock</a></li>
+                        <li id="Admin" runat="server"><a runat="server" href="~/Admin">Admin</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li id="carrito" runat="server"><a runat="server" href="~/Carrito">Carrito</a></li>

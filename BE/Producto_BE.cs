@@ -14,7 +14,6 @@ namespace BE
         public string Marca { get; set; }
         public string Precio { get; set; }
         public string Borrado { get; set; }
-        public int Stock { get; set; }
 
     }
 }

@@ -39,7 +39,7 @@ namespace BLL
                         }
                         else
                         {
-                            this.ActualizarProducto(carrito, detalle, cambios[i].Cantidad);
+                            this.ActualizarCantidad(carrito, detalle, cambios[i].Cantidad);
                         }
                     }
                 }
@@ -50,7 +50,7 @@ namespace BLL
             }
         }
 
-        public void ActualizarProducto(Carrito_BE carrito, DetalleCarrito_BE detalle, int Cantidad)
+        public void ActualizarCantidad(Carrito_BE carrito, DetalleCarrito_BE detalle, int Cantidad)
         {
             detalle.Cantidad = Cantidad;
         }

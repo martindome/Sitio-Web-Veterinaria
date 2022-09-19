@@ -20,7 +20,7 @@
                 <br />
             </div>
             <div style="margin-left: 80px">
-                <asp:Button ID="Button1" runat="server" OnClick="Accion_Click" Text="Backup & Restore" Width="168px" ForeColor="Black" /> 
+                <asp:Button ID="Button1" runat="server" OnClick="Accion_Click" Text="Backup & Restore" Width="168px" ForeColor="Black" CssClass="btn-default" /> 
             </div>
 
         <br />
@@ -38,25 +38,23 @@
             <asp:ListBox ID="ListBox2" runat="server" Height="105px" Width="209px" class="list-group" BackColor="Black" CssClass="list-group"></asp:ListBox>
             <br />
             <br />
-            <asp:Button ID="Button4" runat="server" Height="23px" OnClick="Button4_Click" Text="Desbloquear" Width="168px" ForeColor="Black" />         
+            <asp:Button ID="Button4" runat="server" Height="23px" OnClick="Button4_Click" Text="Desbloquear" Width="168px" ForeColor="Black" CssClass="btn-default" />         
         </div>
         <br />
         </div>
     </div>
    
 
-    
-
     <div>
         <h1 style="background-color: gray;">Bitacora</h1>
-        <div style="padding: 1%";>
+        <div style="margin-left: 80px">
             <asp:Label ID="Label2" runat="server" Text="Presione el boton para observar la bitacora"></asp:Label>
+            <br />
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Mostar Bitacora" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" />
         </div>
-        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Mostar Bitacora" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" />
         <br />
         <br />
         <div>
-            <br />
             <asp:Label ID="Label9" runat="server" Text="Fecha: "></asp:Label>
             <asp:Calendar ID="Calendar1" 
                 selectionmode="DayWeekMonth"

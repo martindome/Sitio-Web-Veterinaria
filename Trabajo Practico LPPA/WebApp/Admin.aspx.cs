@@ -33,6 +33,13 @@ namespace WebApp
             productos.Visible = false;
 
 
+            if (Session["usuario"] == null || !( ( (Usuario_BE)Session["usuario"]).TipoUsuario.id == 1) )
+            {
+                //Sacamos controles de navegacion
+                Response.Redirect("Default.aspx");
+            }
+
+
             if (Session["fechas"] == null)
             {
                 Session["fechas"] = new List<DateTime>();

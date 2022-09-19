@@ -31,22 +31,22 @@ namespace DAL
             foreach (DetalleCarrito_BE detalle in carrito.Productos)
             {
                 SqlParameter[] parametrosDetalle = new SqlParameter[3];
-                parametrosVenta[0] = new SqlParameter();
-                parametrosVenta[0].ParameterName = "@idventa";
-                parametrosVenta[0].DbType = DbType.Int32;
-                parametrosVenta[0].Value = idventa;
+                parametrosDetalle[0] = new SqlParameter();
+                parametrosDetalle[0].ParameterName = "@idventa";
+                parametrosDetalle[0].DbType = DbType.Int32;
+                parametrosDetalle[0].Value = idventa;
 
-                parametrosVenta[1] = new SqlParameter();
-                parametrosVenta[1].ParameterName = "@idproducto";
-                parametrosVenta[1].DbType = DbType.Int32;
-                parametrosVenta[1].Value = detalle.Producto.Id;
+                parametrosDetalle[1] = new SqlParameter();
+                parametrosDetalle[1].ParameterName = "@idproducto";
+                parametrosDetalle[1].DbType = DbType.Int32;
+                parametrosDetalle[1].Value = detalle.Producto.Id;
 
-                parametrosVenta[2] = new SqlParameter();
-                parametrosVenta[2].ParameterName = "@cant";
-                parametrosVenta[2].DbType = DbType.Int32;
-                parametrosVenta[2].Value = detalle.Cantidad;
+                parametrosDetalle[2] = new SqlParameter();
+                parametrosDetalle[2].ParameterName = "@cant";
+                parametrosDetalle[2].DbType = DbType.Int32;
+                parametrosDetalle[2].Value = detalle.Cantidad;
 
-                Tabla = ac.EjecutarStoredProcedure("persistir_detalle", parametrosVenta);
+                Tabla = ac.EjecutarStoredProcedure("persistir_detalle", parametrosDetalle);
             }
             return idventa;
         }

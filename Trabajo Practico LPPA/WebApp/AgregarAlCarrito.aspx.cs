@@ -23,7 +23,11 @@ namespace WebApp
             int Id;
             if (!String.IsNullOrEmpty(rawId) && int.TryParse(rawId, out Id))
             {
-                pCarrito.Agregar(carrito, Convert.ToInt16(rawId));
+                if(!(carrito.Productos.Any(item => item.Producto.Id == Id)))
+                {
+                    //Solo agregamos el producto si no esta en el carrito
+                    pCarrito.Agregar(carrito, Convert.ToInt16(rawId));
+                }
             }
             Response.Redirect("Carrito.aspx");
         }
