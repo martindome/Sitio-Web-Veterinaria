@@ -53,8 +53,10 @@
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Mostar Bitacora" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" />
         </div>
         <br />
-        <br />
+        <br />       
         <div>
+            <h3 style="background-color: gray;">Filtros</h3>
+            <div>
             <asp:Label ID="Label9" runat="server" Text="Fecha: "></asp:Label>
             <asp:Calendar ID="Calendar1" 
                 selectionmode="DayWeekMonth"
@@ -63,8 +65,6 @@
             <asp:Label ID="lblFechas" runat="server" Text=""></asp:Label>
             <br />
         </div>
-        <div>
-            <h3 style="background-color: gray;">Filtros</h3>
             <asp:Label ID="Label3" runat="server" Text="Usuario: "></asp:Label>
             <asp:TextBox ID="TextBox1" runat="server" ForeColor="Black" Width="222px" Height="21px" OnTextChanged="textBox1_TextChanged"></asp:TextBox>
             <br />
