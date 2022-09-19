@@ -51,6 +51,30 @@ namespace DAL
             }
         }
 
+        public void ReestablecerDVV()
+        {
+            foreach (DigitoVerificador_BE mDigitoVerificador in ObtenerTablasDigitoVerificador())
+            {
+                GuardarDigitoVerificador(ObtenerDVHs(mDigitoVerificador.Tabla), mDigitoVerificador.Tabla);
+            }
+        }
+
+        public void ReestablecerDVH()
+        {
+            string mHashCalculado;
+            String[] mRegistroSplit;
+            foreach (DigitoVerificador_BE mDigitoVerificador in ObtenerTablasDigitoVerificador())
+            {
+                foreach (Registro_BE mReg in ObtenerDatosRegistros(mDigitoVerificador.Tabla)) 
+                {
+                    mRegistroSplit = mReg.Datos.Split(char.Parse(";"));
+                    mHashCalculado = CalcularDVH(mRegistroSplit[0]);
+                    string mQuery = "UPDATE " + mReg.Tabla + " SET DVH = '" + mHashCalculado + "' WHERE id= " + mReg.ID_Registro;
+                    DataTable Tabla = ac.EjecutarQuery(mQuery);
+                }
+            }
+        }
+
         public List<string> ObtenerDVHs(string pTabla)
         {
             string mQuery = "SELECT DVH FROM " + pTabla;

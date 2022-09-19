@@ -42,6 +42,17 @@ namespace BLL
                 return Tabla;
             }
         }
+
+        public void ReestablecerDVH()
+        {
+            pIntegridad.ReestablecerDVH();
+        }
+
+        public void ReestablecerDVV()
+        {
+            pIntegridad.ReestablecerDVV();
+        }
+
         #endregion
     }
 }

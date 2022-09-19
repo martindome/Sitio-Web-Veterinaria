@@ -172,6 +172,15 @@ namespace WebApp
             Response.Redirect("/BackupRestore.aspx");
         }
 
+        protected void Accion_Click_Digitos(object sender, EventArgs e)
+        {
+            Integridad_BLL pIntegridad = new Integridad_BLL();
+            pIntegridad.ReestablecerDVH();
+            pIntegridad.ReestablecerDVV();
+            Session["Registros"] = null;
+
+        }
+
         protected void Button4_Click(object sender, EventArgs e)
         {
             string usuarioBq = ListBox2.SelectedValue.ToString();

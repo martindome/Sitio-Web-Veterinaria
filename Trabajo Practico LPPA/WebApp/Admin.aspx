@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="WebApp.Admin" %>
+﻿<%@ Page Title="Admin" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="WebApp.Admin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div>
@@ -9,8 +9,8 @@
         Las acciones que el usuario puede realizar son:<br />
         <br />
         <div style="margin-left: 80px">
-        <asp:ListBox ID="ListBox1" runat="server" class="list-group" BackColor="Black" CssClass="list-group"></asp:ListBox>
-    </div>
+            <asp:ListBox ID="ListBox1" runat="server" class="list-group" BackColor="Black" CssClass="list-group"></asp:ListBox>
+        </div>
     </div>
     
     <div>
@@ -22,7 +22,17 @@
             <div style="margin-left: 80px">
                 <asp:Button ID="Button1" runat="server" OnClick="Accion_Click" Text="Backup & Restore" Width="168px" ForeColor="Black" CssClass="btn-default" /> 
             </div>
-
+        <br />
+    </div>
+    <div>
+        <h1 style="background-color: gray;">Digitos Verificadores</h1>
+            <div style="padding: 1%;">
+                <asp:Label ID="Label6" runat="server" Text="Seleccione el siguiente boton para recalcular los digitos verificadores: "></asp:Label>
+                <br />
+            </div>
+            <div style="margin-left: 80px">
+                <asp:Button ID="ButtonDigitos" runat="server" OnClick="Accion_Click_Digitos" Text="Restaurar" Width="168px" ForeColor="Black" CssClass="btn-default" /> 
+            </div>
         <br />
     </div>
     <div>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FalloIntegridad.aspx.cs" Inherits="WebApp.FalloIntegridad" %>
+﻿<%@ Page Title="FalloIntegridad" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FalloIntegridad.aspx.cs" Inherits="WebApp.FalloIntegridad" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script> 
         protected void OnPaging(object sender, GridViewPageEventArgs e)
