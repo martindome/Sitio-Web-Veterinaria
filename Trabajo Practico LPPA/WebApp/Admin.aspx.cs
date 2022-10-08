@@ -52,37 +52,30 @@ namespace WebApp
             {
                 Response.Redirect("Default.aspx");
             }
-            ListBox1.Items.Clear();
+            ListBoxPermisosUsuario.Items.Clear();
             foreach (Accion_BE accion in usuarioRespuesta.TipoUsuario.listaAcciones)
             {
-                ListBox1.Items.Add(accion.detalle);
+                ListBoxPermisosUsuario.Items.Add(accion.detalle);
             }
             //listado de usuarios bloqueados
+            ListBoxUsuariosBloqueados.ClearSelection();
             foreach (Usuario_BE usuario in usuarioRespuestaBLL.Usuarios_Bloquedos())
             {
-                ListBox2.Items.Add(usuario.Usuario);
+                ListBoxUsuariosBloqueados.Items.Add(usuario.Usuario);
             }
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            //Label2.Text = "Bitacora de actividades: ";
-            //Label3.Visible = true;
-            //Label5.Visible = true;
-            //Label9.Visible = true;
-            //Calendar1.Visible = true;
-            //Button3.Visible = true;
-            //TextBox1.Visible = true;
-            //Label3.Text = "Usuario: ";
-            //Button2.Visible = false;
             this.llenarGrid();
         }
 
-        protected void Button3_Click(object sender, EventArgs e)
+        protected void ButtonLimpiarFiltros_Click(object sender, EventArgs e)
         {
-            TextBox1.Text = "";
+            TextBoxUsuarioFiltro.Text = "";
             ((List<DateTime>)Session["fechas"]).Clear();
-            Calendar1.SelectedDates.Clear();
+            CalendarBitacora.SelectedDates.Clear();
+            this.llenarGrid();
+        }
+
+        protected void Button_Filtrar(object sender, EventArgs e)
+        {
             this.llenarGrid();
         }
 
@@ -95,7 +88,7 @@ namespace WebApp
             List<DetalleBitacora_BE> bitacora = new List<DetalleBitacora_BE>();
 
             bitacora = bitacoraBLL.Cargar_Bitacora();
-            if (TextBox1.Text != "")
+            if (TextBoxUsuarioFiltro.Text != "")
             {
                 bitacora = bitacora.FindAll(FilterFunc);
             }
@@ -103,6 +96,7 @@ namespace WebApp
             {
                 bitacora = bitacora.FindAll(FilterFuncFecha);
             }
+            bitacora.Sort((X, Y) => DateTime.Compare(X.Fecha, Y.Fecha));
             GridView1.DataSource = bitacora;
             GridView1.DataBind();
             if (bitacora.Count == 0)
@@ -113,14 +107,15 @@ namespace WebApp
             {
 
             }
+               
         }
 
         protected void seleccionFecha(object sender, EventArgs e)
         {
-            if (null != Calendar1.SelectedDates)
+            if (null != CalendarBitacora.SelectedDates)
             {
                 ((List<DateTime>)Session["fechas"]).Clear();
-                foreach (DateTime fecha in Calendar1.SelectedDates)
+                foreach (DateTime fecha in CalendarBitacora.SelectedDates)
                 {
                     ((List<DateTime>)Session["fechas"]).Add(fecha);
                 }
@@ -141,7 +136,7 @@ namespace WebApp
 
         private bool FilterFunc(DetalleBitacora_BE detalle)
         {
-            if (detalle.Usuario.Contains(TextBox1.Text) || TextBox1.Text.Contains(detalle.Usuario))
+            if (detalle.Usuario.Contains(TextBoxUsuarioFiltro.Text) || TextBoxUsuarioFiltro.Text.Contains(detalle.Usuario))
             {
                 return true;
             }
@@ -164,12 +159,16 @@ namespace WebApp
             {
                 return false;
             }
-
         }
 
         protected void Accion_Click(object sender, EventArgs e)
         {
             Response.Redirect("/BackupRestore.aspx");
+        }
+
+        protected void CrearUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/CrearUsuario.aspx");
         }
 
         protected void Accion_Click_Digitos(object sender, EventArgs e)
@@ -178,14 +177,13 @@ namespace WebApp
             pIntegridad.ReestablecerDVH();
             pIntegridad.ReestablecerDVV();
             Session["Registros"] = null;
-
         }
 
         protected void Button4_Click(object sender, EventArgs e)
         {
-            string usuarioBq = ListBox2.SelectedValue.ToString();
+            string usuarioBq = ListBoxUsuariosBloqueados.SelectedValue.ToString();
             usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);
-            ListBox2.Items.Remove(usuarioBq);
+            ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
         }
     }
 }

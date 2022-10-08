@@ -44,6 +44,16 @@ namespace BLL
             return mapper.validar_usuario_sinpassword(usuario);
         }
 
+        public void Registar_Cliente(Usuario_BE usuarioBE)
+        {
+            mapper.registrar_usuario_cliente(usuarioBE);
+        }
+
+        public void Registar_Usuario_Admin(Usuario_BE usuarioBE)
+        {
+            mapper.registrar_usuario_admin(usuarioBE);
+        }
+
         public void blanquear_password(string usuario)
         {
              mapper.blanquear_password(usuario);

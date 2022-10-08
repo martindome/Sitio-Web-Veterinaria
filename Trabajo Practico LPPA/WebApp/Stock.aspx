@@ -25,7 +25,7 @@
         </asp:TemplateField> 
         <asp:TemplateField   HeaderText="Tipo">            
             <ItemTemplate>
-                <asp:TextBox ID="TipoProducto" Width="120" runat="server" Text="<%#: Item.Tipo %>"></asp:TextBox> 
+                <asp:TextBox ID="TipoProducto" Width="120" runat="server" enabled="false" Text="<%#: Item.Tipo %>"></asp:TextBox> 
             </ItemTemplate>        
         </asp:TemplateField> 
         <asp:TemplateField HeaderText="Borrar Producto">            
@@ -53,10 +53,13 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="TextBoxTipo" CssClass="col-md-2 control-label">Tipo: </asp:Label>
+            <asp:Label runat="server" CssClass="col-md-2 control-label">Tipo: </asp:Label>
             <div class="col-md-10">
-                <asp:TextBox ID="TextBoxTipo" runat="server" class="form-group"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidatorTipo" runat="server" ControlToValidate="TextBoxTipo" CssClass="text-danger" ErrorMessage="Requerido"></asp:RequiredFieldValidator>
+                <asp:RadioButtonList class="form-check" id="RadioButtonTipo" runat="server">
+                    <asp:ListItem class="form-check-label" Selected="True">Accesorio</asp:ListItem>
+                    <asp:ListItem class="form-check-label" >Mueble</asp:ListItem>
+                    <asp:ListItem class="form-check-label" >Comida</asp:ListItem>
+                </asp:RadioButtonList>
             </div>
         </div>
         <div class="form-group">

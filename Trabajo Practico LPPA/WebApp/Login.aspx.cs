@@ -73,5 +73,10 @@ namespace WebApp
                 Label1.Visible = true;
             }
         }
+
+        protected void Button2_Click(object o, EventArgs e)
+        {
+            Response.Redirect("Registrarse.aspx");
+        }
     }
 }

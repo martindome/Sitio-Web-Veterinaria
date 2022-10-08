@@ -51,7 +51,66 @@ namespace DAL
             return usuarioBE;
         }
 
-        
+        public void registrar_usuario_admin(Usuario_BE usuarioBE)
+        {
+            string password = Calcular_HashMD5(usuarioBE.Contraseña);
+
+            SqlParameter[] parametros = new SqlParameter[4];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@usu";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = usuarioBE.Usuario;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@nom";
+            parametros[1].DbType = DbType.String;
+            parametros[1].Value = usuarioBE.Nombre;
+
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@pass";
+            parametros[2].DbType = DbType.String;
+            parametros[2].Value = password;
+
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@tipo";
+            parametros[3].DbType = DbType.Int32;
+            parametros[3].Value = usuarioBE.TipoUsuario.id;
+
+            DataTable Tabla = ac.EjecutarStoredProcedure("registrar_usuario", parametros);
+
+            int id = 0;
+            string pass = "";
+            string nombre = "";
+            int bloqueado = 0;
+            int tipo_usuario = 0;
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                id = Convert.ToInt32(reg["id"].ToString());
+                tipo_usuario = Convert.ToInt32(reg["tipo_usuario"].ToString());
+                bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
+                pass = reg["contraseña"].ToString();
+                nombre = reg["nombre"].ToString();
+            }
+            string cadena = id.ToString() + usuarioBE.Usuario + pass + nombre + bloqueado.ToString() + tipo_usuario.ToString();
+
+
+            parametros = new SqlParameter[2];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = id;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@dvh";
+            parametros[1].DbType = DbType.String;
+            parametros[1].Value = pIntegridad.CalcularDVH(cadena);
+
+            Tabla = ac.EjecutarStoredProcedure("update_usuario_dvh", parametros);
+
+            pIntegridad.GuardarDigitoVerificador(pIntegridad.ObtenerDVHs("Usuario"), "Usuario");
+        }
+
         public List<Compuesto_BE> Buscar_Acciones(int id_tipo_usuario)
         {
             List<Compuesto_BE> acciones = new List<Compuesto_BE>();
@@ -117,6 +176,66 @@ namespace DAL
             Tabla = ac.EjecutarStoredProcedure("update_usuario_dvh", parametros);
             pIntegridad.GuardarDigitoVerificador(pIntegridad.ObtenerDVHs("Usuario"), "Usuario");
 
+        }
+
+        public void registrar_usuario_cliente(Usuario_BE usuario)
+        {
+            string password = Calcular_HashMD5(usuario.Contraseña);
+
+            SqlParameter[] parametros = new SqlParameter[4];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@usu";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = usuario.Usuario;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@nom";
+            parametros[1].DbType = DbType.String;
+            parametros[1].Value = usuario.Nombre;
+
+            parametros[2] = new SqlParameter();
+            parametros[2].ParameterName = "@pass";
+            parametros[2].DbType = DbType.String;
+            parametros[2].Value = password;
+
+            parametros[3] = new SqlParameter();
+            parametros[3].ParameterName = "@tipo";
+            parametros[3].DbType = DbType.Int32;
+            parametros[3].Value = 2;
+
+            DataTable Tabla = ac.EjecutarStoredProcedure("registrar_usuario", parametros);
+
+            int id = 0;
+            string pass = "";
+            string nombre = "";
+            int bloqueado = 0;
+            int tipo_usuario = 0;
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                id = Convert.ToInt32(reg["id"].ToString());
+                tipo_usuario = Convert.ToInt32(reg["tipo_usuario"].ToString());
+                bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
+                pass = reg["contraseña"].ToString();
+                nombre = reg["nombre"].ToString();
+            }
+            string cadena = id.ToString() + usuario.Usuario + pass + nombre + bloqueado.ToString() + tipo_usuario.ToString();
+
+
+            parametros = new SqlParameter[2];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = id;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@dvh";
+            parametros[1].DbType = DbType.String;
+            parametros[1].Value = pIntegridad.CalcularDVH(cadena);
+
+            Tabla = ac.EjecutarStoredProcedure("update_usuario_dvh", parametros);
+
+            pIntegridad.GuardarDigitoVerificador(pIntegridad.ObtenerDVHs("Usuario"), "Usuario");
         }
 
         public Usuario_BE validar_usuario_sinpassword(string usuario)

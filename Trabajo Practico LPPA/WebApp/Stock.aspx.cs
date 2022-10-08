@@ -84,6 +84,19 @@ namespace WebApp
                     TextBox TipoTextBox = new TextBox();
                     TipoTextBox = (TextBox)ListaProductos.Rows[i].FindControl("TipoProducto");
                     cambios[i].Tipo = TipoTextBox.Text.ToString();
+                    //switch (RadioButtonTipo.SelectedItem.Text)
+                    //{
+                    //    case "Collar":
+                    //        cambios[i].Tipo = "Collar";
+                    //        break;
+                    //    case "Moises":
+                    //        cambios[i].Tipo = "Moises";
+                    //        break;
+                    //    case "Comida":
+                    //        cambios[i].Tipo = "Comida";
+                    //        break;
+                    //}
+
                 }
                 p.ActualizarProductos(cambios);
                 ListaProductos.DataBind();
@@ -98,14 +111,15 @@ namespace WebApp
                 {
                     Producto_BE producto = new Producto_BE();
                     producto.Nombre = TextBoxNombre.Text;
-                    producto.Tipo = TextBoxTipo.Text;
+                    //producto.Tipo = TextBoxTipo.Text;
+                    producto.Tipo = RadioButtonTipo.SelectedItem.Text;
                     producto.Marca = TextBoxMarca.Text;
                     producto.Precio = TextBoxPrecio.Text;
                     p.NuevoProducto(producto);
                     ListaProductos.DataBind();
                     p.Dispose();
                     TextBoxNombre.Text = "";
-                    TextBoxTipo.Text = "";
+                    //TextBoxTipo.Text = "";
                     TextBoxMarca.Text = "";
                     TextBoxPrecio.Text = "";
                 }
