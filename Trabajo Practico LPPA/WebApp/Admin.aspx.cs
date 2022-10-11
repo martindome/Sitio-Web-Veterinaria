@@ -63,7 +63,7 @@ namespace WebApp
             {
                 ListBoxUsuariosBloqueados.Items.Add(usuario.Usuario);
             }
-            this.llenarGrid();
+            //this.llenarGrid();
         }
 
         protected void ButtonLimpiarFiltros_Click(object sender, EventArgs e)
@@ -76,6 +76,7 @@ namespace WebApp
 
         protected void Button_Filtrar(object sender, EventArgs e)
         {
+            
             this.llenarGrid();
         }
 
