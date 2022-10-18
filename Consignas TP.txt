@@ -1,0 +1,43 @@
+## Requerimientos 
+
+ [ ] Login
+
+ [ ] Bitacora
+
+ [ ] [Verificar integridad del sistema](https://www.codeproject.com/Tips/588941/Check-Digit-Vertical-and-Horizontal)
+
+ [ ] Restaurar o recalcular digitos verificadores
+
+ [ ] Backup
+
+ [ ] Usuario: bloquear luego de 3 intentos
+
+ [ ] ABM simple
+
+ [ ] Filtro en consulta de bitacora
+
+ [ ] Usuario, familia, patente (con composite)
+
+ [ ] API AJAX
+
+ [ ] Descargar / generar un archivo XML con los datos de una tabla
+
+
+
+Webservices
+
+ 
+
+### En la carpeta:
+
+ [ ] Politica de backup
+
+ [ ] Ciclo de vida login
+
+ [ ] Tipo de conexion y porque
+
+ [ ] El codigo por capa y explicar las capas.
+
+ [ ] Árbol de navegacion
+
+ [ ] Tipo de encriptacion
