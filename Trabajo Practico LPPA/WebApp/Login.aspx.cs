@@ -57,19 +57,20 @@ namespace WebApp
                 else
                 {
                     usuarioBLL.Bloquear_usuario(TextBoxUsername.Text);
-                    Label1.Text = "Su contraseña es incorrecta, a las 3 veces se le bloqueara el usuario";
+                    Label1.Text = "Usuario o clave invalida";
                     Label1.Visible = true;
                 }
             }
             else if (usuarioBE.Bloqueado == 3)
             {
-                Label1.Text = "Su usuario esta bloqueada. Avisar al webmaster para el desbloqueo";
+                Label1.Text = "Su usuario esta bloqueado. Contactar administrador.";
                 Label1.Visible = true;
             }
 
             else
             {
                 //Usuario o contraseña invalidos
+                Label1.Text = "Usuario o clave invalida";
                 Label1.Visible = true;
             }
         }
