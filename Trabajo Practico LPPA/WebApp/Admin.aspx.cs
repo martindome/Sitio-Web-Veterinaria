@@ -18,6 +18,7 @@ namespace WebApp
         Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
         protected void Page_Load(object sender, EventArgs e)
         {
+
             //Sacamos controles de navegacion
             HtmlGenericControl about = (HtmlGenericControl)this.Master.FindControl("inicio");
             about.Visible = false;
@@ -32,38 +33,40 @@ namespace WebApp
             HtmlGenericControl productos = (HtmlGenericControl)this.Master.FindControl("productos");
             productos.Visible = false;
 
+            if (!IsPostBack) {
+                if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1))
+                {
+                    //Sacamos controles de navegacion
+                    Response.Redirect("Default.aspx");
+                }
 
-            if (Session["usuario"] == null || !( ( (Usuario_BE)Session["usuario"]).TipoUsuario.id == 1) )
-            {
-                //Sacamos controles de navegacion
-                Response.Redirect("Default.aspx");
+
+                if (Session["fechas"] == null)
+                {
+                    Session["fechas"] = new List<DateTime>();
+                }
+
+                usuarioRespuesta = (Usuario_BE)Session["usuario"];
+                Label1.Text = "Bienvenido " + usuarioRespuesta.Nombre + " Usted tiene permisos de: " + usuarioRespuesta.TipoUsuario.tipo_usuario;
+
+                if (usuarioRespuesta == null || usuarioRespuesta.TipoUsuario.id != 1)
+                {
+                    Response.Redirect("Default.aspx");
+                }
+                ListBoxPermisosUsuario.Items.Clear();
+                foreach (Accion_BE accion in usuarioRespuesta.TipoUsuario.listaAcciones)
+                {
+                    ListBoxPermisosUsuario.Items.Add(accion.detalle);
+                }
+                //listado de usuarios bloqueados
+                ListBoxUsuariosBloqueados.Items.Clear();
+                foreach (Usuario_BE usuario in usuarioRespuestaBLL.Usuarios_Bloquedos())
+                {
+                    ListBoxUsuariosBloqueados.Items.Add(usuario.Usuario);
+                }
+                //this.llenarGrid();
             }
 
-
-            if (Session["fechas"] == null)
-            {
-                Session["fechas"] = new List<DateTime>();
-            }
-
-            usuarioRespuesta = (Usuario_BE)Session["usuario"];
-            Label1.Text = "Bienvenido " + usuarioRespuesta.Nombre + " Usted tiene permisos de: " + usuarioRespuesta.TipoUsuario.tipo_usuario;
-
-            if (usuarioRespuesta == null || usuarioRespuesta.TipoUsuario.id != 1)
-            {
-                Response.Redirect("Default.aspx");
-            }
-            ListBoxPermisosUsuario.Items.Clear();
-            foreach (Accion_BE accion in usuarioRespuesta.TipoUsuario.listaAcciones)
-            {
-                ListBoxPermisosUsuario.Items.Add(accion.detalle);
-            }
-            //listado de usuarios bloqueados
-            ListBoxUsuariosBloqueados.ClearSelection();
-            foreach (Usuario_BE usuario in usuarioRespuestaBLL.Usuarios_Bloquedos())
-            {
-                ListBoxUsuariosBloqueados.Items.Add(usuario.Usuario);
-            }
-            //this.llenarGrid();
         }
 
         protected void ButtonLimpiarFiltros_Click(object sender, EventArgs e)
@@ -181,6 +184,13 @@ namespace WebApp
         }
 
         protected void Button4_Click(object sender, EventArgs e)
+        {
+                string usuarioBq = ListBoxUsuariosBloqueados.SelectedValue.ToString();
+                usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);
+                ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
+        }
+
+        protected void ListBoxUsuariosBloqueados_SelectedIndexChanged(object sender, EventArgs e)
         {
             string usuarioBq = ListBoxUsuariosBloqueados.SelectedValue.ToString();
             usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);

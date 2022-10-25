@@ -59,7 +59,7 @@
             </div>
         </div>
         <div style="margin-left: 80px">
-            <asp:ListBox ID="ListBoxUsuariosBloqueados" runat="server" Height="105px" Width="209px" class="list-group" BackColor="Black" CssClass="list-group"></asp:ListBox>
+            <asp:ListBox ID="ListBoxUsuariosBloqueados" runat="server" Height="105px" Width="209px" BackColor="Black"></asp:ListBox>
             <br />
             <br />
             <asp:Button ID="ButtonDesbloquearUsuario" runat="server" Height="23px" OnClick="Button4_Click" Text="Desbloquear" Width="168px" ForeColor="Black" CssClass="btn-default" />         
