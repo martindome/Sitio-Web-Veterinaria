@@ -65,9 +65,32 @@ namespace WebApp
                     ListBoxUsuariosBloqueados.Items.Add(usuario.Usuario);
                 }
                 //this.llenarGrid();
+                if (!IsPostBack)
+                {
+                    //(Digito Verificador) 13 - Se muestran las tablas por pantalla
+                    this.llenarGridVerificacion();
+                }
             }
 
         }
+
+
+        private void llenarGridVerificacion()
+        {
+            GridView1.Visible = true;
+
+            List<Registro_BE> registros = new List<Registro_BE>();
+
+            registros = (List<Registro_BE>)Session["Registros"];
+            GridViewDigitosVerificadores.DataSource = registros;
+            GridViewDigitosVerificadores.DataBind();
+        }
+
+        //protected void OnPaging(object sender, GridViewPageEventArgs e)
+        //{
+        //    GridView1.PageIndex = e.NewPageIndex;
+        //    this.llenarGridVerificacion();
+        //}
 
         protected void ButtonLimpiarFiltros_Click(object sender, EventArgs e)
         {
@@ -181,6 +204,8 @@ namespace WebApp
             pIntegridad.ReestablecerDVH();
             pIntegridad.ReestablecerDVV();
             Session["Registros"] = null;
+            llenarGridVerificacion();
+            ClientScript.RegisterStartupScript(this.GetType(), "callfunction", "alert('Restauracion realizada correctamente');", true);
         }
 
         protected void Button4_Click(object sender, EventArgs e)

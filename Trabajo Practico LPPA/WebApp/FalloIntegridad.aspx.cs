@@ -38,29 +38,29 @@ namespace WebApp
             List<Registro_BE> tablas = (List<Registro_BE>)Session["Registros"];
             
 
-            if (!IsPostBack)
-            {
-                //(Digito Verificador) 13 - Se muestran las tablas por pantalla
-                this.llenarGrid();
-            }
+            //if (!IsPostBack)
+            //{
+            //    //(Digito Verificador) 13 - Se muestran las tablas por pantalla
+            //    this.llenarGrid();
+            //}
 
 
         }
-        private void llenarGrid()
-        {
-            GridView1.Visible = true;
+        //private void llenarGrid()
+        //{
+        //    GridView1.Visible = true;
 
-            List<Registro_BE> registros = new List<Registro_BE>();
+        //    List<Registro_BE> registros = new List<Registro_BE>();
 
-            registros = (List<Registro_BE>)Session["Registros"];
-            GridView1.DataSource = registros;
-            GridView1.DataBind();
-        }
+        //    registros = (List<Registro_BE>)Session["Registros"];
+        //    GridView1.DataSource = registros;
+        //    GridView1.DataBind();
+        //}
 
-        protected void OnPaging(object sender, GridViewPageEventArgs e)
-        {
-            GridView1.PageIndex = e.NewPageIndex;
-            this.llenarGrid();
-        }
+        //protected void OnPaging(object sender, GridViewPageEventArgs e)
+        //{
+        //    GridView1.PageIndex = e.NewPageIndex;
+        //    this.llenarGrid();
+        //}
     }
 }
