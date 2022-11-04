@@ -148,7 +148,7 @@ namespace WebApp
             usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);
             ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
             Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
-            string detalle = "Usuario" + usuarioBq + "  debloqueado con exito por: " + ((Usuario_BE)Session["usuario"]).Usuario;
+            string detalle = "Usuario " + usuarioBq + "  debloqueado con exito por: " + ((Usuario_BE)Session["usuario"]).Usuario;
             bitacoraBLL.LLenar_Bitacora(((Usuario_BE)Session["usuario"]).IdUsuario, detalle);
         }
 
