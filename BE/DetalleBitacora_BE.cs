@@ -47,7 +47,13 @@ namespace BE
             set { usuario = value; }
         }
 
+        private string fechaString;
 
+        public string FechaString
+        {
+            get { return fechaString; }
+            set { fechaString = value; }
+        }
 
     }
 }

@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using BE;
 using BLL;
 using BE.Composite;
+using System.Data;
 
 namespace WebApp
 {
@@ -18,6 +19,9 @@ namespace WebApp
         Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            TextBoxUsuarioBitacora.Attributes["onkeydown"] = "getBitacoraFiltrado()";
+
 
             //Sacamos controles de navegacion
             HtmlGenericControl about = (HtmlGenericControl)this.Master.FindControl("inicio");
@@ -74,7 +78,7 @@ namespace WebApp
 
         }
 
-
+        #region Verificacion
         private void llenarGridVerificacion()
         {
             GridView1.Visible = true;
@@ -91,7 +95,18 @@ namespace WebApp
         //    GridView1.PageIndex = e.NewPageIndex;
         //    this.llenarGridVerificacion();
         //}
+        protected void Accion_Click_Digitos(object sender, EventArgs e)
+        {
+            Integridad_BLL pIntegridad = new Integridad_BLL();
+            pIntegridad.ReestablecerDVH();
+            pIntegridad.ReestablecerDVV();
+            Session["Registros"] = null;
+            llenarGridVerificacion();
+            ClientScript.RegisterStartupScript(this.GetType(), "callfunction", "alert('Restauracion realizada correctamente');", true);
+        }
+        #endregion
 
+        #region Bitacora
         protected void ButtonLimpiarFiltros_Click(object sender, EventArgs e)
         {
             TextBoxUsuarioFiltro.Text = "";
@@ -135,6 +150,13 @@ namespace WebApp
 
             }
                
+        }
+
+        [System.Web.Services.WebMethod]
+        public static void llenarGridAJAX()
+        {
+            System.Console.WriteLine("Si");
+
         }
 
         protected void seleccionFecha(object sender, EventArgs e)
@@ -187,27 +209,23 @@ namespace WebApp
                 return false;
             }
         }
+        #endregion
 
+        #region Realizar Backup
         protected void Accion_Click(object sender, EventArgs e)
         {
             Response.Redirect("/BackupRestore.aspx");
         }
+        #endregion
 
+        #region Nuevo usuario
         protected void CrearUsuario_Click(object sender, EventArgs e)
         {
             Response.Redirect("/CrearUsuario.aspx");
         }
+        #endregion
 
-        protected void Accion_Click_Digitos(object sender, EventArgs e)
-        {
-            Integridad_BLL pIntegridad = new Integridad_BLL();
-            pIntegridad.ReestablecerDVH();
-            pIntegridad.ReestablecerDVV();
-            Session["Registros"] = null;
-            llenarGridVerificacion();
-            ClientScript.RegisterStartupScript(this.GetType(), "callfunction", "alert('Restauracion realizada correctamente');", true);
-        }
-
+        #region Desbloqueo usuario
         protected void Button4_Click(object sender, EventArgs e)
         {
                 string usuarioBq = ListBoxUsuariosBloqueados.SelectedValue.ToString();
@@ -221,5 +239,6 @@ namespace WebApp
             usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);
             ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
         }
+        #endregion
     }
 }

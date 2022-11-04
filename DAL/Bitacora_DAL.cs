@@ -65,6 +65,7 @@ namespace DAL
                 detalle.Detalle = reg["detalle"].ToString();
                 detalle.Usuario = reg["usuario"].ToString();
                 detalle.Fecha = Convert.ToDateTime(reg["Fecha"].ToString());
+                detalle.FechaString = detalle.Fecha.ToString(("MM/dd/yyyy HH:mm:ss"));
                 bitacora.Add(detalle);
             }
             return bitacora;

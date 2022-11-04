@@ -109,6 +109,7 @@
     <Content Include="Admin.aspx" />
     <Content Include="AgregarAlCarrito.aspx" />
     <Content Include="BackupRestore.aspx" />
+    <Content Include="BitacoraService.asmx" />
     <Content Include="Carrito.aspx" />
     <Content Include="CatalogoImagenes\Accesorio.jpg" />
     <Content Include="CatalogoImagenes\Comida.jpg" />
@@ -203,6 +204,9 @@
     </Compile>
     <Compile Include="BackupRestore.aspx.designer.cs">
       <DependentUpon>BackupRestore.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BitacoraService.asmx.cs">
+      <DependentUpon>BitacoraService.asmx</DependentUpon>
     </Compile>
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>

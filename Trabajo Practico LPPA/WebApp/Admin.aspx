@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Admin" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="WebApp.Admin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <div>
         <h1 style="background-color: gray;">Permisos</h1>
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
@@ -124,12 +123,12 @@
             <br />
         </div>
             <asp:Label ID="Label3" runat="server" Text="Usuario: "></asp:Label>
-            <asp:TextBox ID="TextBoxUsuarioFiltro" runat="server" ForeColor="Black" Width="222px" Height="21px"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUsuarioFiltro" runat="server" ForeColor="Black" Width="222px" Height="21px" ToolTip="Ingrese Nombre de Usuario" ></asp:TextBox>
             <%--<asp:TextBox ID="TextBox1" runat="server" ForeColor="Black" Width="222px" Height="21px" OnTextChanged="textBox1_TextChanged">></asp:TextBox>--%>
             <%--<br />--%>
             <%--<asp:Label ID="Label5" runat="server" Visible="True" Text="Presione enter para filtrar."></asp:Label>--%>
             <br />
-            <asp:Button ID="ButtonFiltrarBitacora" runat="server" OnClick="Button_Filtrar" Text="Filtrar" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" />
+            <asp:Button ID="ButtonFiltrarBitacora" runat="server" Text="Filtrar" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" OnClientClick="getBitacora()" />
             <br />
             <asp:Button ID="ButtonLimpiarFiltros" runat="server" OnClick="ButtonLimpiarFiltros_Click" Text="Limpiar Filtros" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" />
         </div>
@@ -137,6 +136,101 @@
         <br />
         <br />
         
+    <div id="PruebaBitacora">
+        <h1 style="background-color: gray;">Bitacora Prueba</h1>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+            function getBitacora3() {
+                $.ajax({
+                    type: "POST",
+                    url: "BitacoraService.asmx/ListarBitacoraFiltrado",
+                    data: "{nombre: '" + $('#<%= TextBoxUsuarioBitacora.ClientID %>').val() + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var cars = response.d;
+                        //console.debug(cars);
+                        $('#output').empty();
+                        $.each(cars, function (index, car) {
+                            console.debug(car.Make);
+                            $('#output').append('<p><strong>' + car.Id + ' ' +
+                                car.Id_Usuario + '</strong><br /> Year: ' +
+                                car.Detalle + '<br />Doors: ' +
+                                car.Fecha + '</p>');
+                        });
+                    },
+                    failure: function (msg) {
+                        $('#output').text(msg);
+                    }
+                });
+        }
+    </script>
+    <script>
+        function getBitacoraFiltrado() {
+            $.ajax({
+                type: "POST",
+                url: "BitacoraService.asmx/ListarBitacoraFiltrado",
+                data: "{nombre: '" + $('#<%= TextBoxUsuarioBitacora.ClientID %>').val() + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.debug("Here");
+                    $('#output').empty();
+                    var cars = response.d;
+                    let table = document.createElement('table');
+                    //Creamos headers
+                    let row = document.createElement('tr');
+                    let data = document.createElement('td');
+                    data.appendChild(document.createTextNode('Usuario'))
+                    row.appendChild(data);
+                    data = document.createElement('td');
+                    data.appendChild(document.createTextNode('Detalle'))
+                    row.appendChild(data);
+                    data = document.createElement('td');
+                    data.appendChild(document.createTextNode('Fecha'))
+                    row.appendChild(data);
+                    table.appendChild(row);
+                    //Iteramos
+                    for (let entry of cars) {
+                        row = document.createElement('tr');
+                        data = document.createElement('td');
+                        data.appendChild(document.createTextNode(entry.Usuario));
+                        row.appendChild(data);
+                        data = document.createElement('td');
+                        data.appendChild(document.createTextNode(entry.Detalle));
+                        row.appendChild(data);
+                        data = document.createElement('td');
+                        data.appendChild(document.createTextNode(entry.FechaString));
+                        row.appendChild(data);
+                        table.appendChild(row);
+                    }
+                    $('#output').append(table);
+
+                },
+                failure: function (msg) {
+                    $('#output').text(msg);
+                }
+            });
+        }
+
+    </script>
+    <div>
+        Usuario: <asp:TextBox ID="TextBoxUsuarioBitacora" runat="server"></asp:TextBox>
+        <br/>
+        Desde: <asp:TextBox ID="TextBoxFechaDesde" runat="server" TextMode="Date"></asp:TextBox>
+        <br/>
+        Hasta: <asp:TextBox ID="TextBoxFechaHasta" runat="server" TextMode="Date"></asp:TextBox>
+        <br />
+        <br />
+
     </div>
 
+    <div id="output"></div>
+    
+
+
+    
+    </div>
 </asp:Content>

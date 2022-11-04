@@ -1,3 +1,7 @@
+        //https://www.c-sharpcorner.com/blogs/how-to-bind-gridview-using-json-and-webservices1
+        //https://www.mikesdotnetting.com/article/97/cascading-dropdownlists-with-jquery-and-asp-net
+        //https://www.mikesdotnetting.com/Article/96/Handling-JSON-Arrays-returned-from-ASP.NET-Web-Services-with-jQuery
+
 # Universidad Abierta Interamericana
 
 ## Facultad de Tecnolog!a Inform tica
