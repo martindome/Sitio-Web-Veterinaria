@@ -1,4 +1,7 @@
-        //https://www.c-sharpcorner.com/blogs/how-to-bind-gridview-using-json-and-webservices1
+git log --decorate --oneline --tags --no-walk --> para ver solo los commits tag
+git log --decorate --oneline --tags --graph --> para ver el path de commits        
+
+//https://www.c-sharpcorner.com/blogs/how-to-bind-gridview-using-json-and-webservices1
         //https://www.mikesdotnetting.com/article/97/cascading-dropdownlists-with-jquery-and-asp-net
         //https://www.mikesdotnetting.com/Article/96/Handling-JSON-Arrays-returned-from-ASP.NET-Web-Services-with-jQuery
 	//https://stackoverflow.com/questions/71853391/message-shows-undefined-when-ajax-post-in-asp-net
