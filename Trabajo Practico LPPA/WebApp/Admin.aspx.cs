@@ -21,6 +21,9 @@ namespace WebApp
         {
 
             TextBoxUsuarioBitacora.Attributes["onkeydown"] = "getBitacoraFiltrado()";
+            TextBoxFechaDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            TextBoxFechaHasta.Text = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
+
 
 
             //Sacamos controles de navegacion
