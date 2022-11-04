@@ -12,6 +12,9 @@ using System.Data;
 using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.Web.Script.Services;
+using System.IO;
+using System.Xml;
+using System.Threading.Tasks;
 
 namespace WebApp
 {
@@ -127,14 +130,74 @@ namespace WebApp
         [WebMethod]
         public static List<DetalleBitacora_BE> ListarBitacoraFiltrado(string nombre, string fechaDesde, string fechaHasta)
         {
-            var query = from c in new Bitacora_BLL().Cargar_Bitacora() where (c.Usuario.Contains(nombre) || nombre.Contains(c.Usuario)) select c;
+
+            List<DetalleBitacora_BE> aux = new Bitacora_BLL().Cargar_Bitacora();
+
             DateTime Desde = DateTime.Parse(fechaDesde);
             DateTime Hasta = DateTime.Parse(fechaHasta).AddDays(1);
-            List<DetalleBitacora_BE> aux = query.ToList();
-            query = from c in aux where (c.Fecha >= Desde && c.Fecha <= Hasta) select c;
+            var query = from c in aux where (c.Fecha >= Desde && c.Fecha <= Hasta) select c;
             aux = query.ToList();
+            
+            if (nombre.Length != 0) {
+                query = from c in aux where (c.Usuario.Contains(nombre) || nombre.Contains(c.Usuario)) select c;
+                aux = query.ToList();
+            }
+            
             aux.Sort((x, y) => DateTime.Compare(x.Fecha, y.Fecha));
             return aux;
+        }
+
+        protected void ButtonExportar_Click(object sender, EventArgs e)
+        {
+            //ACA USAMOS XML ESCRITURA
+            List<DetalleBitacora_BE> bitacora = ListarBitacoraFiltrado(TextBoxUsuarioBitacora.Text, TextBoxFechaDesde.Text, TextBoxFechaHasta.Text);
+            //string tempPath = Path.GetTempFileName();
+            string path = System.IO.Path.GetTempPath() + "bitacora.xml";
+            //System.Xml.XmlTextWriter miEscritor = new System.Xml.XmlTextWriter(Server.MapPath("files//bitacora.xml"), null);
+            System.Xml.XmlTextWriter miEscritor = new System.Xml.XmlTextWriter(path, null);
+
+            miEscritor.Formatting = Formatting.Indented;
+            miEscritor.WriteStartDocument();
+            miEscritor.WriteStartElement("Bitacora");
+
+            foreach (DetalleBitacora_BE b in bitacora)
+            {
+
+                miEscritor.WriteStartElement("Entrada");
+                miEscritor.WriteAttributeString("ID", b.Id.ToString());
+                miEscritor.WriteStartElement("ID");
+                miEscritor.WriteString(b.Id.ToString());
+                miEscritor.WriteEndElement();
+                miEscritor.WriteStartElement("Usuario");
+                miEscritor.WriteString(b.Usuario);
+                miEscritor.WriteEndElement();
+                miEscritor.WriteStartElement("ID Usuario");
+                miEscritor.WriteString(b.Id_Usuario.ToString());
+                miEscritor.WriteEndElement();
+                miEscritor.WriteStartElement("Detalle");
+                miEscritor.WriteString(b.Detalle);
+                miEscritor.WriteEndElement();
+                miEscritor.WriteStartElement("Fecha");
+                miEscritor.WriteString(b.FechaString);
+                miEscritor.WriteEndElement();
+                miEscritor.WriteEndElement();
+            }
+            miEscritor.WriteEndElement();
+            miEscritor.WriteEndDocument();
+            miEscritor.Flush();
+            miEscritor.Close();
+
+            Response.ContentType = "xml";
+            //Response.ContentType = "image/jpeg";
+            string filename = "Bitacora-" + DateTime.Now.ToString("ddmmyyyyhhmmss") + ".xml";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename);
+            Response.TransmitFile(path);
+            //string path = Server.MapPath("files//bitacora.xml");
+            //FileInfo file = new FileInfo(path);
+            //file.Delete();
+            //var deletionTask = Task.Run(() => file.Delete());
+            Response.End();
+
         }
         #endregion
 
@@ -169,6 +232,9 @@ namespace WebApp
             usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);
             ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
         }
+
         #endregion
+
+        
     }
 }

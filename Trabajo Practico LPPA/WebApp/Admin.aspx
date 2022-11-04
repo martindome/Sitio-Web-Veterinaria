@@ -95,10 +95,11 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        console.debug("Here");
-                        $('#output').empty();
+                        //Limpiamos tabla
+                        var table = document.getElementById('<%=TablaBitacoraHTML.ClientID %>')
+                        table.innerHTML = "";
+                        //Parseamos datos
                         var cars = response.d;
-                        let table = document.createElement('table');
                         //Creamos headers
                         let row = document.createElement('tr');
                         let data = document.createElement('td');
@@ -149,10 +150,11 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        console.debug("Here");
-                        $('#output').empty();
+                        //Limpiamos tabla
+                        var table = document.getElementById('<%=TablaBitacoraHTML.ClientID %>')
+                        table.innerHTML = "";
+                        //Parseamos datos
                         var cars = response.d;
-                        let table = document.createElement('table');
                         //Creamos headers
                         let row = document.createElement('tr');
                         let data = document.createElement('td');
@@ -188,6 +190,7 @@
                 });
             }
         </script>
+
         <h1 style="background-color: gray;">Bitacora</h1>
         <div class="col-md-10">
             <br/>
@@ -197,10 +200,34 @@
             <br/>
             Hasta:&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBoxFechaHasta" runat="server" TextMode="Date"></asp:TextBox>
             <br />
+            <asp:Button ID="ButtonExportar" runat="server" Text="Exportar XML" OnClick="ButtonExportar_Click" />
+            <br />
+            <br />
             <br />
 
         </div style="max-height:600px;overflow-y:scroll;">
 
-        <div id="output"></div>
+        <div id="output">
+            <%--<table id="TablaBitacoraHTML" style="width: 100%;">
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>--%>
+            <asp:table runat="server" id="TablaBitacoraHTML" style="width: 100%;">
+            </asp:table>
+            
+        </div>
     </div>
 </asp:Content>

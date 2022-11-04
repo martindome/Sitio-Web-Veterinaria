@@ -8,6 +8,11 @@ git log --decorate --oneline --tags --graph --> para ver el path de commits
         Setart en RouteConfing.cs //settings.AutoRedirectMode = RedirectMode.Permanent; (comentar la linea) para que pueda ir al codebehind a buscar el metodo
 	https://www.technical-recipes.com/2017/creating-and-consuming-a-web-service-in-c-net/ Como agregar referencia para utilizar web service
 	//https://www.javatpoint.com/web-services-in-c-sharp Como agregar referencia a WebService C# (Pero este si ando)
+	https://www.aspsnippets.com/Articles/Call-Server-Side-function-from-JavaScript-without-PostBack-in-ASPNet.aspx#:~:text=and%20VB.Net.-,In%20order%20to%20call%20a%20Server%20Side%20function%20from%20JavaScript,without%20PostBack%20in%20ASP.Net. Como correr desde client un metodo (sin ajax)
+
+
+
+
 # Universidad Abierta Interamericana
 
 ## Facultad de Tecnolog!a Inform tica
