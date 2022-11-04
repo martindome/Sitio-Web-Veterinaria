@@ -1,7 +1,8 @@
         //https://www.c-sharpcorner.com/blogs/how-to-bind-gridview-using-json-and-webservices1
         //https://www.mikesdotnetting.com/article/97/cascading-dropdownlists-with-jquery-and-asp-net
         //https://www.mikesdotnetting.com/Article/96/Handling-JSON-Arrays-returned-from-ASP.NET-Web-Services-with-jQuery
-
+	//https://stackoverflow.com/questions/71853391/message-shows-undefined-when-ajax-post-in-asp-net
+        Setart en RouteConfing.cs //settings.AutoRedirectMode = RedirectMode.Permanent; (comentar la linea) para que pueda ir al codebehind a buscar el metodo
 # Universidad Abierta Interamericana
 
 ## Facultad de Tecnolog!a Inform tica
