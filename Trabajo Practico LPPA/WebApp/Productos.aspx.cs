@@ -8,6 +8,8 @@ using BE;
 using BE.Composite;
 using BLL;
 using System.Web.ModelBinding;
+using System.Net;
+using System.Web.Services;
 
 namespace WebApp
 {
@@ -32,16 +34,48 @@ namespace WebApp
                         [QueryString("id")] int? categoryId,
                         [RouteData] string categoryName)
         {
+
+            //Aca usamos el web service
+            //https://www.javatpoint.com/web-services-in-c-sharp
             List<Producto_BE> aux = new List<Producto_BE>();
-            List<Producto_BE> productos = pProducto_BLL.Listar_Productos();
-            foreach(Producto_BE p in productos) { 
+            WebApp.ProductsWeb.ProductsWebServicesSoapClient client = new ProductsWeb.ProductsWebServicesSoapClient();
+            ProductsWeb.Producto_BE[] products = client.ListProducts();
+            foreach (ProductsWeb.Producto_BE product in products)
+            {
+                Producto_BE pProducto = new Producto_BE();
+                pProducto.Marca = product.Marca;
+                pProducto.Id = product.Id;
+                pProducto.Nombre = product.Nombre;
+                pProducto.Precio = product.Precio;
+                pProducto.Borrado = product.Borrado;
+                pProducto.Tipo = product.Tipo;
+                aux.Add(pProducto);
+            }
+
+            List<Producto_BE> list = new List<Producto_BE>();
+            foreach (Producto_BE p in aux)
+            {
                 if (p.Borrado == "No")
                 {
-                    aux.Add(p);
+                    list.Add(p);
                 }
             }
-            IQueryable<Producto_BE> query = aux.AsQueryable<Producto_BE>();
+            IQueryable<Producto_BE> query = list.AsQueryable<Producto_BE>();
             return query;
+
+            //Esto anda
+            //List<Producto_BE> aux = new List<Producto_BE>();
+
+
+            //List<Producto_BE> productos = pProducto_BLL.Listar_Productos();
+            //foreach(Producto_BE p in productos) { 
+            //    if (p.Borrado == "No")
+            //    {
+            //        aux.Add(p);
+            //    }
+            //}
+            //IQueryable<Producto_BE> query = aux.AsQueryable<Producto_BE>();
+            //return query;
         }
     }
 }

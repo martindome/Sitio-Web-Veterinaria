@@ -3,6 +3,8 @@
         //https://www.mikesdotnetting.com/Article/96/Handling-JSON-Arrays-returned-from-ASP.NET-Web-Services-with-jQuery
 	//https://stackoverflow.com/questions/71853391/message-shows-undefined-when-ajax-post-in-asp-net
         Setart en RouteConfing.cs //settings.AutoRedirectMode = RedirectMode.Permanent; (comentar la linea) para que pueda ir al codebehind a buscar el metodo
+	https://www.technical-recipes.com/2017/creating-and-consuming-a-web-service-in-c-net/ Como agregar referencia para utilizar web service
+	//https://www.javatpoint.com/web-services-in-c-sharp Como agregar referencia a WebService C# (Pero este si ando)
 # Universidad Abierta Interamericana
 
 ## Facultad de Tecnolog!a Inform tica
