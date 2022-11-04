@@ -26,8 +26,8 @@ namespace WebApp
         public List<DetalleBitacora_BE> ListarBitacora()
         {
             
-            DateTime Desde = DateTime.Now.AddDays(1);
-            DateTime Hasta = DateTime.Now.AddDays(-7);
+            DateTime Hasta = DateTime.Now.AddDays(1);
+            DateTime Desde = DateTime.Now.AddDays(-7);
             var query = from c in new Bitacora_BLL().Cargar_Bitacora() where (c.Fecha > Desde && c.Fecha < Hasta) select c;
             List<DetalleBitacora_BE> aux = query.ToList();
             aux.Sort((x, y) => DateTime.Compare(x.Fecha, y.Fecha));
