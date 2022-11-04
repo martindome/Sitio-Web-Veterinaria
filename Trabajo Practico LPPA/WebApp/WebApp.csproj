@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="BitacoraService.asmx.cs">
       <DependentUpon>BitacoraService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>

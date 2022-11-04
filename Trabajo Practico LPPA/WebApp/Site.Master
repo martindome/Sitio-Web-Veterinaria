@@ -7,17 +7,20 @@
     <style>
         table,
         th,
-        td {
-          border: 1px solid black;
-
+        th{
+            border: 1px solid; 
         }
         th{
-             height: 50px;
-             background-color: #04AA6D;
-             color: white;
+            height: 50px;
+            background-color: #04AA6D;
+            color: white;
+            
         }
         td{
-            text-align: center
+            border: 1px solid black;
+            text-align: center;
+            font-size: medium;
+            
         }
         table{
             width: 80%;

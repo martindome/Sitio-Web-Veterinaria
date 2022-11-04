@@ -44,6 +44,7 @@
     <Compile Include="Bitacora_DAL.cs" />
     <Compile Include="Carrito_DAL.cs" />
     <Compile Include="Integridad_DAL.cs" />
+    <Compile Include="Permisos_DAL.cs" />
     <Compile Include="Producto_DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario_DAL.cs" />

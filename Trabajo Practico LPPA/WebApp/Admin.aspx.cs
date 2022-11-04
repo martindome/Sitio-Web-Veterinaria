@@ -9,6 +9,9 @@ using BE;
 using BLL;
 using BE.Composite;
 using System.Data;
+using System.Web.Services;
+using System.Web.Services.Protocols;
+using System.Web.Script.Services;
 
 namespace WebApp
 {
@@ -21,8 +24,10 @@ namespace WebApp
         {
 
             TextBoxUsuarioBitacora.Attributes["onkeydown"] = "getBitacoraFiltrado()";
-            TextBoxFechaDesde.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            TextBoxFechaHasta.Text = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
+            TextBoxFechaDesde.Attributes["onchange"] = "getBitacoraFiltrado()";
+            TextBoxFechaHasta.Attributes["onchange"] = "getBitacoraFiltrado()";
+            TextBoxFechaHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            TextBoxFechaDesde.Text = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
 
 
 
@@ -84,133 +89,41 @@ namespace WebApp
         #region Verificacion
         private void llenarGridVerificacion()
         {
-            GridView1.Visible = true;
-
+            GridViewDigitosVerificadores.Visible = true;
             List<Registro_BE> registros = new List<Registro_BE>();
-
             registros = (List<Registro_BE>)Session["Registros"];
             GridViewDigitosVerificadores.DataSource = registros;
             GridViewDigitosVerificadores.DataBind();
         }
 
-        //protected void OnPaging(object sender, GridViewPageEventArgs e)
-        //{
-        //    GridView1.PageIndex = e.NewPageIndex;
-        //    this.llenarGridVerificacion();
-        //}
         protected void Accion_Click_Digitos(object sender, EventArgs e)
         {
+
             Integridad_BLL pIntegridad = new Integridad_BLL();
             pIntegridad.ReestablecerDVH();
             pIntegridad.ReestablecerDVV();
             Session["Registros"] = null;
             llenarGridVerificacion();
+            Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
+            string detalle = "Digitos de verificacion reestablecidos: " + ((Usuario_BE)Session["usuario"]).Usuario;
+            bitacoraBLL.LLenar_Bitacora(((Usuario_BE)Session["usuario"]).IdUsuario, detalle);
             ClientScript.RegisterStartupScript(this.GetType(), "callfunction", "alert('Restauracion realizada correctamente');", true);
         }
         #endregion
 
-        #region Bitacora
-        protected void ButtonLimpiarFiltros_Click(object sender, EventArgs e)
+        #region bitacora
+        [WebMethod]
+        public static List<DetalleBitacora_BE> ListarBitacoraFiltrado(string nombre, string fechaDesde, string fechaHasta)
         {
-            TextBoxUsuarioFiltro.Text = "";
-            ((List<DateTime>)Session["fechas"]).Clear();
-            CalendarBitacora.SelectedDates.Clear();
-            this.llenarGrid();
-        }
-
-        protected void Button_Filtrar(object sender, EventArgs e)
-        {
-            
-            this.llenarGrid();
-        }
-
-        private void llenarGrid()
-        {
-            string detalle = "Consulta de bitacora - Usuario: " + usuarioRespuesta.Usuario;
-            bitacoraBLL.LLenar_Bitacora(usuarioRespuesta.IdUsuario, detalle);
-            GridView1.Visible = true;
-
-            List<DetalleBitacora_BE> bitacora = new List<DetalleBitacora_BE>();
-
-            bitacora = bitacoraBLL.Cargar_Bitacora();
-            if (TextBoxUsuarioFiltro.Text != "")
-            {
-                bitacora = bitacora.FindAll(FilterFunc);
-            }
-            if (((List<DateTime>)Session["fechas"]).Count > 0)
-            {
-                bitacora = bitacora.FindAll(FilterFuncFecha);
-            }
-            bitacora.Sort((X, Y) => DateTime.Compare(X.Fecha, Y.Fecha));
-            GridView1.DataSource = bitacora;
-            GridView1.DataBind();
-            if (bitacora.Count == 0)
-            {
-
-            }
-            else
-            {
-
-            }
-               
-        }
-
-        [System.Web.Services.WebMethod]
-        public static void llenarGridAJAX()
-        {
-            System.Console.WriteLine("Si");
-
-        }
-
-        protected void seleccionFecha(object sender, EventArgs e)
-        {
-            if (null != CalendarBitacora.SelectedDates)
-            {
-                ((List<DateTime>)Session["fechas"]).Clear();
-                foreach (DateTime fecha in CalendarBitacora.SelectedDates)
-                {
-                    ((List<DateTime>)Session["fechas"]).Add(fecha);
-                }
-            }
-            llenarGrid();
-        }
-
-        protected void OnPaging(object sender, GridViewPageEventArgs e)
-        {
-            GridView1.PageIndex = e.NewPageIndex;
-            this.llenarGrid();
-        }
-
-        protected void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            llenarGrid();
-        }
-
-        private bool FilterFunc(DetalleBitacora_BE detalle)
-        {
-            if (detalle.Usuario.Contains(TextBoxUsuarioFiltro.Text) || TextBoxUsuarioFiltro.Text.Contains(detalle.Usuario))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private bool FilterFuncFecha(DetalleBitacora_BE detalle)
-        {
-            DateTime fechaInicio = ((List<DateTime>)Session["fechas"])[0];
-            DateTime fechaFin = ((List<DateTime>)Session["fechas"])[((List<DateTime>)Session["fechas"]).Count - 1].AddDays(1);
-            DateTime f = new DateTime(detalle.Fecha.Year, detalle.Fecha.Month, detalle.Fecha.Day);
-            if (f >= fechaInicio && f < fechaFin)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //Este metodo no se esta utilizando. Se usa el webservice de BitacoraService.asmx
+            var query = from c in new Bitacora_BLL().Cargar_Bitacora() where (c.Usuario.Contains(nombre) || nombre.Contains(c.Usuario)) select c;
+            DateTime Desde = DateTime.Parse(fechaDesde);
+            DateTime Hasta = DateTime.Parse(fechaHasta).AddDays(1);
+            List<DetalleBitacora_BE> aux = query.ToList();
+            query = from c in aux where (c.Fecha >= Desde && c.Fecha <= Hasta) select c;
+            aux = query.ToList();
+            aux.Sort((x, y) => DateTime.Compare(x.Fecha, y.Fecha));
+            return aux;
         }
         #endregion
 
@@ -231,9 +144,12 @@ namespace WebApp
         #region Desbloqueo usuario
         protected void Button4_Click(object sender, EventArgs e)
         {
-                string usuarioBq = ListBoxUsuariosBloqueados.SelectedValue.ToString();
-                usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);
-                ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
+            string usuarioBq = ListBoxUsuariosBloqueados.SelectedValue.ToString();
+            usuarioRespuestaBLL.Desbloquear_Usuario(usuarioBq);
+            ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
+            Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
+            string detalle = "Usuario" + usuarioBq + "  debloqueado con exito por: " + ((Usuario_BE)Session["usuario"]).Usuario;
+            bitacoraBLL.LLenar_Bitacora(((Usuario_BE)Session["usuario"]).IdUsuario, detalle);
         }
 
         protected void ListBoxUsuariosBloqueados_SelectedIndexChanged(object sender, EventArgs e)

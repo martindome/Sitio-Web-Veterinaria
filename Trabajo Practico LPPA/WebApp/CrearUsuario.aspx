@@ -37,8 +37,7 @@
                         <asp:Label runat="server" AssociatedControlID="TextBoxPassword" CssClass="col-md-2 control-label">Tipo Usuario</asp:Label>
                         <div class="col-md-10">
                             <asp:RadioButtonList class="form-check" id="RadioButtonTipo" runat="server">
-                                <asp:ListItem class="form-check-label" Selected="True">Admin</asp:ListItem>
-                                <asp:ListItem class="form-check-label" >Control Stock</asp:ListItem>
+                                
                             </asp:RadioButtonList>
                         </div>
                     </div>

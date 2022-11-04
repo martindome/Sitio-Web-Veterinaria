@@ -14,14 +14,23 @@ namespace WebApp
     {
         Usuario_BLL usuarioBLL = new Usuario_BLL();
         Usuario_BE usuarioBE = new Usuario_BE();
+        Permisos_BLL permisosBLL = new Permisos_BLL();
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1))
+            if (!IsPostBack)
             {
-                //Sacamos controles de navegacion
-                Response.Redirect("Default.aspx");
+                if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1))
+                {
+                    //Sacamos controles de navegacion
+                    Response.Redirect("Default.aspx");
+                }
+                List<TipoUsuario_BE> permisos = permisosBLL.ListarPermisos();
+                foreach(TipoUsuario_BE permiso in permisos)
+                {
+                    RadioButtonTipo.Items.Add(new ListItem(permiso.tipo_usuario, permiso.id.ToString()));
+                }
             }
+            
 
         }
 
@@ -40,11 +49,14 @@ namespace WebApp
                     usuarioBE.TipoUsuario = new TipoUsuario_BE();
                     switch (RadioButtonTipo.SelectedItem.Text)
                     {
-                        case "Admin":
+                        case "Webmaster":
                             usuarioBE.TipoUsuario.id =1;
                             break;
                         case "Control Stock":
                             usuarioBE.TipoUsuario.id=3;
+                            break;
+                        case "Cliente":
+                            usuarioBE.TipoUsuario.id = 2;
                             break;
                     }
                     usuarioBLL.Registar_Usuario_Admin(usuarioBE);

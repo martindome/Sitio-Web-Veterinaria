@@ -81,6 +81,9 @@ namespace WebApp
                     usuarioRespuestaBLL.RestoreDB(Session["Ruta"].ToString());
                     Label7.Text = "El Restore se ha realizado correctamente!";
                     Label7.Visible = true;
+                    Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
+                    string detalle = "Restauracion realizada con exito por: " + ((Usuario_BE)Session["usuario"]).Usuario;
+                    bitacoraBLL.LLenar_Bitacora(((Usuario_BE)Session["usuario"]).IdUsuario, detalle);
                 }
                 else
                 {
@@ -96,6 +99,9 @@ namespace WebApp
                 usuarioRespuestaBLL.TakeDB(nombre, Convert.ToString(Session["Ruta"]));
                 Label7.Text = "El Backup se ha realizado correctamente! el mismo se guardó en raiz del proyecto/Trabajo Practico LPPA/Backups";
                 Label7.Visible = true;
+                Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
+                string detalle = "Backup realizado con exito por: " + ((Usuario_BE)Session["usuario"]).Usuario;
+                bitacoraBLL.LLenar_Bitacora(((Usuario_BE)Session["usuario"]).IdUsuario, detalle);
             }
 
         }

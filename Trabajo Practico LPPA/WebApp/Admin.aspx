@@ -40,8 +40,8 @@
     <div>
         <h1 style="background-color: gray;">Digitos Verificadores</h1>
             <div style="padding: 1%;">
-                <asp:GridView ID="GridViewDigitosVerificadores" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-                    OnPageIndexChanging="OnPaging" PageSize="10" Font-Names="Arial" BackColor="#999999" BorderColor="Black" BorderStyle="Dashed" ForeColor="Black">
+                <asp:GridView ID="GridViewDigitosVerificadores" runat="server" AutoGenerateColumns="false"
+                    Font-Names="Arial" BackColor="#999999" BorderColor="Black" BorderStyle="Dashed" ForeColor="Black">
                     <Columns>
                         <asp:BoundField ItemStyle-Width="150px" DataField="Tabla" HeaderText="Tabla" >
                         <ItemStyle Width="150px"></ItemStyle>
@@ -81,156 +81,125 @@
         <br />
         </div>
     </div>
-   
-
-    <div>
-        <h1 style="background-color: gray;">Bitacora</h1>
-        <%--<asp:Label ID="Label5" runat="server" Visible="True" Text="Presione enter para filtrar."></asp:Label>--%>
-<%--        <br />
-        <br />    --%>   
-        <div id="popup" style="max-height:600px;overflow-y:scroll;">
-            <asp:GridView class="table" ID="GridView1" runat="server" AutoGenerateColumns="false" AllowPaging="true"
-            OnPageIndexChanging="OnPaging" PageSize="10" Font-Names="Arial" BackColor="#999999" BorderColor="Black" BorderStyle="Dashed" ForeColor="Black" >
-            <Columns>
-                <asp:BoundField ItemStyle-Width="150px" DataField="Fecha" HeaderText="Fecha" >
-                <ItemStyle Width="150px"></ItemStyle>
-                </asp:BoundField>
-                <asp:BoundField ItemStyle-Width="100px" DataField="Usuario" HeaderText="Usuario" >
-                <ItemStyle Width="100px"></ItemStyle>
-                </asp:BoundField>
-                    <asp:BoundField ItemStyle-Width="80px" DataField="Id_Usuario" HeaderText="Id_Usuario" >
-                <ItemStyle Width="80px"></ItemStyle>
-                </asp:BoundField>
-                <asp:BoundField ItemStyle-Width="400px" DataField="Detalle" HeaderText="Detalle" >
-                <ItemStyle Width="400px"></ItemStyle>
-                </asp:BoundField>  
-            </Columns>
-                <HeaderStyle BackColor="#999999" BorderColor="Black" />
-                <PagerStyle CssClass="gridpager" />
-                <PagerSettings Mode="NextPreviousFirstLast" FirstPageText="&nbsp;<<&nbsp;" PreviousPageText="&nbsp;<&nbsp;" NextPageText="&nbsp;>&nbsp;" LastPageText="&nbsp;>>&nbsp;"  Position="Bottom" />
-                <RowStyle BackColor="#CCCCCC" />
-        </asp:GridView>
-      </div>
-        <div>
-            <h3 style="background-color: gray;">Filtros</h3>
-            <div>
-            <asp:Label ID="LabelFecha" runat="server" Text="Fecha: "></asp:Label>
-            <asp:Calendar class="input-group date" ID="CalendarBitacora" 
-                selectionmode="DayWeekMonth"
-                onselectionchanged="seleccionFecha"
-                runat="server" Height="58px" Width="326px" BackColor="#666666" ForeColor="Black" NextPrevFormat="ShortMonth"></asp:Calendar>
-            <asp:Label ID="lblFechas" runat="server" Text=""></asp:Label>
-            <br />
-        </div>
-            <asp:Label ID="Label3" runat="server" Text="Usuario: "></asp:Label>
-            <asp:TextBox ID="TextBoxUsuarioFiltro" runat="server" ForeColor="Black" Width="222px" Height="21px" ToolTip="Ingrese Nombre de Usuario" ></asp:TextBox>
-            <%--<asp:TextBox ID="TextBox1" runat="server" ForeColor="Black" Width="222px" Height="21px" OnTextChanged="textBox1_TextChanged">></asp:TextBox>--%>
-            <%--<br />--%>
-            <%--<asp:Label ID="Label5" runat="server" Visible="True" Text="Presione enter para filtrar."></asp:Label>--%>
-            <br />
-            <asp:Button ID="ButtonFiltrarBitacora" runat="server" Text="Filtrar" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" OnClientClick="getBitacora()" />
-            <br />
-            <asp:Button ID="ButtonLimpiarFiltros" runat="server" OnClick="ButtonLimpiarFiltros_Click" Text="Limpiar Filtros" Visible="True" Width="168px" ForeColor="Black" Height="23px" CssClass="btn-default" />
-        </div>
         
-        <br />
-        <br />
-        
-    <div id="PruebaBitacora">
-        <h1 style="background-color: gray;">Bitacora Prueba</h1>
-        
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-            function getBitacora3() {
+    <div id="Bitacora" style="form-group">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            window.onload = getBitacora;
+            function getBitacora() {
                 $.ajax({
                     type: "POST",
-                    url: "BitacoraService.asmx/ListarBitacoraFiltrado",
-                    data: "{nombre: '" + $('#<%= TextBoxUsuarioBitacora.ClientID %>').val() + "'}",
+                    url: "BitacoraService.asmx/ListarBitacora",
+                    data: '{}',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        var cars = response.d;
-                        //console.debug(cars);
+                        console.debug("Here");
                         $('#output').empty();
-                        $.each(cars, function (index, car) {
-                            console.debug(car.Make);
-                            $('#output').append('<p><strong>' + car.Id + ' ' +
-                                car.Id_Usuario + '</strong><br /> Year: ' +
-                                car.Detalle + '<br />Doors: ' +
-                                car.Fecha + '</p>');
-                        });
+                        var cars = response.d;
+                        let table = document.createElement('table');
+                        //Creamos headers
+                        let row = document.createElement('tr');
+                        let data = document.createElement('td');
+                        data.appendChild(document.createTextNode('Usuario'))
+                        row.appendChild(data);
+                        data = document.createElement('td');
+                        data.appendChild(document.createTextNode('Detalle'))
+                        row.appendChild(data);
+                        data = document.createElement('td');
+                        data.appendChild(document.createTextNode('Fecha (MM-DD-YYYY)'))
+                        row.appendChild(data);
+                        table.appendChild(row);
+                        //Iteramos
+                        for (let entry of cars) {
+                            row = document.createElement('tr');
+                            data = document.createElement('td');
+                            data.appendChild(document.createTextNode(entry.Usuario));
+                            row.appendChild(data);
+                            data = document.createElement('td');
+                            data.appendChild(document.createTextNode(entry.Detalle));
+                            row.appendChild(data);
+                            data = document.createElement('td');
+                            data.appendChild(document.createTextNode(entry.FechaString));
+                            row.appendChild(data);
+                            table.appendChild(row);
+                        }
+                        $('#output').append(table);
+
                     },
                     failure: function (msg) {
                         $('#output').text(msg);
                     }
                 });
-        }
-    </script>
-    <script>
-        function getBitacoraFiltrado() {
-            $.ajax({
-                type: "POST",
-                url: "BitacoraService.asmx/ListarBitacoraFiltrado",
-                data: "{nombre: '" + $('#<%= TextBoxUsuarioBitacora.ClientID %>').val() + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    console.debug("Here");
-                    $('#output').empty();
-                    var cars = response.d;
-                    let table = document.createElement('table');
-                    //Creamos headers
-                    let row = document.createElement('tr');
-                    let data = document.createElement('td');
-                    data.appendChild(document.createTextNode('Usuario'))
-                    row.appendChild(data);
-                    data = document.createElement('td');
-                    data.appendChild(document.createTextNode('Detalle'))
-                    row.appendChild(data);
-                    data = document.createElement('td');
-                    data.appendChild(document.createTextNode('Fecha'))
-                    row.appendChild(data);
-                    table.appendChild(row);
-                    //Iteramos
-                    for (let entry of cars) {
-                        row = document.createElement('tr');
-                        data = document.createElement('td');
-                        data.appendChild(document.createTextNode(entry.Usuario));
+            }
+        </script>
+
+        <script>
+            function getBitacoraFiltrado() {
+                var data = JSON.stringify({
+                    'nombre': $('#<%= TextBoxUsuarioBitacora.ClientID %>').val(),
+                    'fechaDesde': $('#<%= TextBoxFechaDesde.ClientID %>').val(),
+                    'fechaHasta': $('#<%= TextBoxFechaHasta.ClientID %>').val(),
+                })
+                $.ajax({
+                    type: "POST",
+                    url: "BitacoraService.asmx/ListarBitacoraFiltrado",
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.debug("Here");
+                        $('#output').empty();
+                        var cars = response.d;
+                        let table = document.createElement('table');
+                        //Creamos headers
+                        let row = document.createElement('tr');
+                        let data = document.createElement('td');
+                        data.appendChild(document.createTextNode('Usuario'))
                         row.appendChild(data);
                         data = document.createElement('td');
-                        data.appendChild(document.createTextNode(entry.Detalle));
+                        data.appendChild(document.createTextNode('Detalle'))
                         row.appendChild(data);
                         data = document.createElement('td');
-                        data.appendChild(document.createTextNode(entry.FechaString));
+                        data.appendChild(document.createTextNode('Fecha (MM-DD-YYYY)'))
                         row.appendChild(data);
                         table.appendChild(row);
+                        //Iteramos
+                        for (let entry of cars) {
+                            row = document.createElement('tr');
+                            data = document.createElement('td');
+                            data.appendChild(document.createTextNode(entry.Usuario));
+                            row.appendChild(data);
+                            data = document.createElement('td');
+                            data.appendChild(document.createTextNode(entry.Detalle));
+                            row.appendChild(data);
+                            data = document.createElement('td');
+                            data.appendChild(document.createTextNode(entry.FechaString));
+                            row.appendChild(data);
+                            table.appendChild(row);
+                        }
+                        $('#output').append(table);
+
+                    },
+                    failure: function (msg) {
+                        $('#output').text(msg);
                     }
-                    $('#output').append(table);
+                });
+            }
+        </script>
+        <h1 style="background-color: gray;">Bitacora</h1>
+        <div class="col-md-10">
+            <br/>
+            Usuario: <asp:TextBox ID="TextBoxUsuarioBitacora" runat="server"></asp:TextBox>
+            <br/>
+            Desde:&nbsp;&nbsp; <asp:TextBox ID="TextBoxFechaDesde" runat="server" TextMode="Date"></asp:TextBox>
+            <br/>
+            Hasta:&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBoxFechaHasta" runat="server" TextMode="Date"></asp:TextBox>
+            <br />
+            <br />
 
-                },
-                failure: function (msg) {
-                    $('#output').text(msg);
-                }
-            });
-        }
+        </div style="max-height:600px;overflow-y:scroll;">
 
-    </script>
-    <div>
-        Usuario: <asp:TextBox ID="TextBoxUsuarioBitacora" runat="server"></asp:TextBox>
-        <br/>
-        Desde: <asp:TextBox ID="TextBoxFechaDesde" runat="server" TextMode="Date"></asp:TextBox>
-        <br/>
-        Hasta: <asp:TextBox ID="TextBoxFechaHasta" runat="server" TextMode="Date"></asp:TextBox>
-        <br />
-        <br />
-
-    </div>
-
-    <div id="output"></div>
-    
-
-
-    
+        <div id="output"></div>
     </div>
 </asp:Content>

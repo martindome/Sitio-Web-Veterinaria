@@ -11,17 +11,6 @@ using BLL;
 
 namespace WebApp
 {
-    public class Car
-
-    {
-        public string Make;
-        public string Model;
-        public int Year;
-        public int Doors;
-        public string Colour;
-        public float Price;
-
-    }
 
     /// <summary>
     /// Descripción breve de BitacoraService
@@ -32,51 +21,30 @@ namespace WebApp
     [ScriptService]
     public class BitacoraService : System.Web.Services.WebService
     {
-        List<Car> Cars = new List<Car>{
-            new Car{Make="Audi",Model="A4",Year=1995,Doors=5,Colour="Red",Price=2995f},
-            new Car{Make="Ford",Model="Focus",Year=2002,Doors=5,Colour="Black",Price=3250f},
-            new Car{Make="BMW",Model="5 Series",Year=2006,Doors=4,Colour="Grey",Price=24950f},
-            new Car{Make="Renault",Model="Laguna",Year=2000,Doors=5,Colour="Red",Price=3995f},
-            new Car{Make="Toyota",Model="Previa",Year=1998,Doors=5,Colour="Green",Price=2695f},
-            new Car{Make="Mini",Model="Cooper",Year=2005,Doors=2,Colour="Grey",Price=9850f},
-            new Car{Make="Mazda",Model="MX 5",Year=2003,Doors=2,Colour="Silver",Price=6995f},
-            new Car{Make="Ford",Model="Fiesta",Year=2004,Doors=3,Colour="Red",Price=3759f},
-            new Car{Make="Honda",Model="Accord",Year=1997,Doors=4,Colour="Silver",Price=1995f}
-        };
-
-        [WebMethod]
-        public List<Car> GetAllCars()
-        {
-            return Cars;
-        }
-
-        [WebMethod]
-        public List<Car> GetCarsByDoors(int doors)
-        {
-            var query = from c in Cars
-                        where c.Doors == doors
-                        select c;
-            return query.ToList();
-        }
-
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hola a todos";
-        }
 
         [WebMethod]
         public List<DetalleBitacora_BE> ListarBitacora()
         {
-            return new Bitacora_BLL().Cargar_Bitacora();
+            
+            DateTime Desde = DateTime.Now.AddDays(1);
+            DateTime Hasta = DateTime.Now.AddDays(-7);
+            var query = from c in new Bitacora_BLL().Cargar_Bitacora() where (c.Fecha > Desde && c.Fecha < Hasta) select c;
+            List<DetalleBitacora_BE> aux = query.ToList();
+            aux.Sort((x, y) => DateTime.Compare(x.Fecha, y.Fecha));
+            return aux;
         }
 
         [WebMethod]
-        public List<DetalleBitacora_BE> ListarBitacoraFiltrado(string nombre)
+        public List<DetalleBitacora_BE> ListarBitacoraFiltrado(string nombre, string fechaDesde, string fechaHasta)
         {
             var query = from c in new Bitacora_BLL().Cargar_Bitacora() where (c.Usuario.Contains(nombre) || nombre.Contains(c.Usuario)) select c;
-            return query.ToList();
+            DateTime Desde = DateTime.Parse(fechaDesde);
+            DateTime Hasta = DateTime.Parse(fechaHasta).AddDays(1);
+            List<DetalleBitacora_BE> aux =  query.ToList();
+            query = from c in aux where (c.Fecha >= Desde && c.Fecha <= Hasta) select c;
+            aux = query.ToList();
+            aux.Sort((x, y) => DateTime.Compare(x.Fecha, y.Fecha));
+            return aux;
         }
-
     }
 }
