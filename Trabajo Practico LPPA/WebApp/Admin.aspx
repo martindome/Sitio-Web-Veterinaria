@@ -86,10 +86,11 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
             window.onload = getBitacora;
+            $(document).ready(getBitacora);
             function getBitacora() {
                 $.ajax({
                     type: "POST",
-                    url: "BitacoraService.asmx/ListarBitacora",
+                    url: "Admin.aspx/ListarBitacora",
                     data: '{}',
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -143,7 +144,7 @@
                 })
                 $.ajax({
                     type: "POST",
-                    url: "BitacoraService.asmx/ListarBitacoraFiltrado",
+                    url: "Admin.aspx/ListarBitacoraFiltrado",
                     data: data,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
