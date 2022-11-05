@@ -102,13 +102,13 @@
                         var cars = response.d;
                         //Creamos headers
                         let row = document.createElement('tr');
-                        let data = document.createElement('td');
+                        let data = document.createElement('th');
                         data.appendChild(document.createTextNode('Usuario'))
                         row.appendChild(data);
-                        data = document.createElement('td');
+                        data = document.createElement('th');
                         data.appendChild(document.createTextNode('Detalle'))
                         row.appendChild(data);
-                        data = document.createElement('td');
+                        data = document.createElement('th');
                         data.appendChild(document.createTextNode('Fecha (MM-DD-YYYY)'))
                         row.appendChild(data);
                         table.appendChild(row);
@@ -157,13 +157,13 @@
                         var cars = response.d;
                         //Creamos headers
                         let row = document.createElement('tr');
-                        let data = document.createElement('td');
+                        let data = document.createElement('th');
                         data.appendChild(document.createTextNode('Usuario'))
                         row.appendChild(data);
-                        data = document.createElement('td');
+                        data = document.createElement('th');
                         data.appendChild(document.createTextNode('Detalle'))
                         row.appendChild(data);
-                        data = document.createElement('td');
+                        data = document.createElement('th');
                         data.appendChild(document.createTextNode('Fecha (MM-DD-YYYY)'))
                         row.appendChild(data);
                         table.appendChild(row);
@@ -223,8 +223,11 @@
         </div>
 
         <div id="output">
-            <asp:table runat="server" id="TablaBitacoraHTML" style="width: 100%;max-height:600px;overflow-y:scroll;">
+            <asp:table runat="server" id="TablaBitacoraHTML">
             </asp:table>    
         </div>
+        <br />
+        <br />
+        <br />
     </div>
 </asp:Content>

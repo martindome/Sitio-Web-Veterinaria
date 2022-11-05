@@ -51,15 +51,6 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.TextBox TextBoxNombre;
 
         /// <summary>
-        /// Control RequiredFieldValidatorNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorNombre;
-
-        /// <summary>
         /// Control RadioButtonTipo.
         /// </summary>
         /// <remarks>
@@ -78,15 +69,6 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.TextBox TextBoxMarca;
 
         /// <summary>
-        /// Control RequiredFieldValidatorMarca.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorMarca;
-
-        /// <summary>
         /// Control TextBoxPrecio.
         /// </summary>
         /// <remarks>
@@ -96,15 +78,6 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.TextBox TextBoxPrecio;
 
         /// <summary>
-        /// Control RequiredFieldValidatorPrecio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorPrecio;
-
-        /// <summary>
         /// Control ButtonCreate.
         /// </summary>
         /// <remarks>
@@ -112,5 +85,32 @@ namespace WebApp
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonCreate;
+
+        /// <summary>
+        /// Control Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+
+        /// <summary>
+        /// Control FileUpload1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+
+        /// <summary>
+        /// Control ButtonUpload.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonUpload;
     }
 }

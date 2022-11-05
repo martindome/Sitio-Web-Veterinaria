@@ -9,6 +9,10 @@ using BE.Composite;
 using BLL;
 using System.Web.ModelBinding;
 using System.Collections.Specialized;
+using System.IO;
+using System.Xml;
+using System.Xml.XPath;
+using System.Xml.Xsl;
 
 namespace WebApp
 {
@@ -124,6 +128,71 @@ namespace WebApp
                     TextBoxPrecio.Text = "";
                 }
             }
+        }
+
+        
+
+        protected void ButtonUpload_Click1(object sender, EventArgs e)
+        {
+            try {
+                foreach (var file in FileUpload1.PostedFiles)
+                {
+                    Response.Write(file.FileName + " - " + file.ContentLength + " Bytes. <br />");
+                    using (Producto_BLL p = new Producto_BLL())
+                    {
+                        List<Producto_BE> productos = p.Listar_Productos();
+                        List<Producto_BE> lista = new List<Producto_BE>();
+                        //upload logic  
+
+                        file.SaveAs(Server.MapPath("~/") + "temp.xml");
+                        XPathDocument docu = new XPathDocument(Server.MapPath("temp.xml"));
+                        XPathNavigator navi = docu.CreateNavigator();
+                        XPathNodeIterator ite = navi.Select("productos/producto/nombre");
+                        int i = 0;
+                        while (ite.MoveNext())
+                        {
+                            lista.Add(new Producto_BE());
+                            lista[i].Nombre = ite.Current.Value;
+                            i++;
+                        }
+                        i = 0;
+                        ite = navi.Select("productos/producto/precio");
+                        while (ite.MoveNext())
+                        {
+                            lista[i].Precio = ite.Current.Value;
+                            i++;
+                        }
+                        i = 0;
+                        ite = navi.Select("productos/producto/marca");
+                        while (ite.MoveNext())
+                        {
+                            lista[i].Marca = ite.Current.Value;
+                            i++;
+                        }
+                        i = 0;
+                        ite = navi.Select("productos/producto/tipo");
+                        while (ite.MoveNext())
+                        {
+                            lista[i].Tipo = ite.Current.Value;
+                            i++;
+                        }
+                        foreach (Producto_BE producto in lista)
+                        {
+                            if(!productos.Any(item => item.Nombre == producto.Nombre && item.Tipo == producto.Tipo))
+                            {
+                                p.NuevoProducto(producto);
+                                ListaProductos.DataBind();
+                                p.Dispose();
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                
+            }
+            
         }
     }
 }
