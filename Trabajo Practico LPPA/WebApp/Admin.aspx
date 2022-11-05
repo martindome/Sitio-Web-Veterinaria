@@ -193,41 +193,38 @@
 
         <h1 style="background-color: gray;">Bitacora</h1>
         <div class="col-md-10">
-            <br/>
-            Usuario: <asp:TextBox ID="TextBoxUsuarioBitacora" runat="server"></asp:TextBox>
-            <br/>
-            Desde:&nbsp;&nbsp; <asp:TextBox ID="TextBoxFechaDesde" runat="server" TextMode="Date"></asp:TextBox>
-            <br/>
-            Hasta:&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBoxFechaHasta" runat="server" TextMode="Date"></asp:TextBox>
+            <br/> 
+            <asp:Label ID="LabelUsuarioBitacora" runat="server" Text="Usuario: " CssClass="col-md-2 control-label"></asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox ID="TextBoxUsuarioBitacora" runat="server"></asp:TextBox>
+            </div>
+            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+            <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+            <link rel="stylesheet" href="/resources/demos/style.css">
+            <asp:Label ID="LabelFechaDesdeBitacora" runat="server" Text="Desde: " CssClass="col-md-2 control-label"></asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox ID="TextBoxFechaDesde" runat="server" class="datepicker"></asp:TextBox>
+            </div>
+            <asp:Label ID="LabelFechaHastaBitacora" runat="server" Text="Hasta: " CssClass="col-md-2 control-label"></asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox ID="TextBoxFechaHasta" runat="server" class="datepicker"></asp:TextBox>
+            </div>
+            <script>
+                $(document).on('ready', function () {
+                    $(".datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+                });
+            </script>
             <br />
+            &nbsp;&nbsp;&nbsp;
             <asp:Button ID="ButtonExportar" runat="server" Text="Exportar XML" OnClick="ButtonExportar_Click" />
             <br />
             <br />
             <br />
-
-        </div style="max-height:600px;overflow-y:scroll;">
+        </div>
 
         <div id="output">
-            <%--<table id="TablaBitacoraHTML" style="width: 100%;">
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>--%>
-            <asp:table runat="server" id="TablaBitacoraHTML" style="width: 100%;">
-            </asp:table>
-            
+            <asp:table runat="server" id="TablaBitacoraHTML" style="width: 100%;max-height:600px;overflow-y:scroll;">
+            </asp:table>    
         </div>
     </div>
 </asp:Content>

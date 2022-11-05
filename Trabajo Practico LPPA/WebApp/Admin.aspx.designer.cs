@@ -132,6 +132,15 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.Button ButtonDesbloquearUsuario;
 
         /// <summary>
+        /// Control LabelUsuarioBitacora.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelUsuarioBitacora;
+
+        /// <summary>
         /// Control TextBoxUsuarioBitacora.
         /// </summary>
         /// <remarks>
@@ -141,6 +150,15 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.TextBox TextBoxUsuarioBitacora;
 
         /// <summary>
+        /// Control LabelFechaDesdeBitacora.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelFechaDesdeBitacora;
+
+        /// <summary>
         /// Control TextBoxFechaDesde.
         /// </summary>
         /// <remarks>
@@ -148,6 +166,15 @@ namespace WebApp
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxFechaDesde;
+
+        /// <summary>
+        /// Control LabelFechaHastaBitacora.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelFechaHastaBitacora;
 
         /// <summary>
         /// Control TextBoxFechaHasta.

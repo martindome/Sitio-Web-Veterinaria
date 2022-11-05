@@ -27,6 +27,7 @@ namespace WebApp
         {
 
             TextBoxUsuarioBitacora.Attributes["onkeydown"] = "getBitacoraFiltrado()";
+            TextBoxUsuarioBitacora.Attributes["onchange"] = "getBitacoraFiltrado()";
             TextBoxFechaDesde.Attributes["onchange"] = "getBitacoraFiltrado()";
             TextBoxFechaHasta.Attributes["onchange"] = "getBitacoraFiltrado()";
             TextBoxFechaHasta.Text = DateTime.Now.ToString("yyyy-MM-dd");
@@ -150,7 +151,13 @@ namespace WebApp
         protected void ButtonExportar_Click(object sender, EventArgs e)
         {
             //ACA USAMOS XML ESCRITURA
-            List<DetalleBitacora_BE> bitacora = ListarBitacoraFiltrado(TextBoxUsuarioBitacora.Text, TextBoxFechaDesde.Text, TextBoxFechaHasta.Text);
+            string fechadesde = Request.Form["ctl00$MainContent$TextBoxFechaDesde"];
+            string fechahasta = Request.Form["ctl00$MainContent$TextBoxFechaHasta"];
+
+            //TextBox pTextBox = (TextBox)Admin.FindControl("TextBoxFechaDesde");
+            //TextBox pTextBox = this.FindControl("TextBoxFechaDesde") as TextBox;
+            //string value = pTextBox.Text;
+            List <DetalleBitacora_BE> bitacora = ListarBitacoraFiltrado(TextBoxUsuarioBitacora.Text, fechadesde, fechahasta);
             //string tempPath = Path.GetTempFileName();
             string path = System.IO.Path.GetTempPath() + "bitacora.xml";
             //System.Xml.XmlTextWriter miEscritor = new System.Xml.XmlTextWriter(Server.MapPath("files//bitacora.xml"), null);
@@ -233,8 +240,7 @@ namespace WebApp
             ListBoxUsuariosBloqueados.Items.Remove(usuarioBq);
         }
 
-        #endregion
 
-        
+        #endregion
     }
 }
