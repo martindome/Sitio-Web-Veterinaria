@@ -220,6 +220,17 @@ namespace WebApp
         {
             Response.Redirect("/CrearUsuario.aspx");
         }
+
+        protected void ButtonAdministarUsuarios_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Permisos.aspx");
+        }
+
+        protected void ButtonAdministrarPermisos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Perfiles.aspx");
+        }
+
         #endregion
 
         #region Desbloqueo usuario
@@ -242,5 +253,6 @@ namespace WebApp
 
 
         #endregion
+
     }
 }

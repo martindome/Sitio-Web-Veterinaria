@@ -5,7 +5,7 @@
         <div class="col-md-8">
             <section id="LoginForm">
                 <div class="form-horizontal">
-                    <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
+                    <%--<asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                         <p class="text-danger">
                             <asp:Literal runat="server" ID="FailureText" />
                         </p>
@@ -29,9 +29,11 @@
                             <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Debe ingresar una contraseña para continuar"></asp:RequiredFieldValidator>
                             <br /><asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="TextBoxPassword" CssClass="text-danger" ErrorMessage="Su password debe contener entre 8 y 20 caracteres, al menos 1 numero y 1 caracter especial" ValidationExpression="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"></asp:RegularExpressionValidator>
                             <br /><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxUsername" CssClass="text-danger" ErrorMessage="Debe ingresar un usuario para continuar"></asp:RequiredFieldValidator>
-                        </div>
-                        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-                    </div>
+                        </div>--%>        
+                    <%--</div>--%>
+                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                    <asp:Login ID="LoginControl" runat="server" OnAuthenticate="LoginControl_Authenticate"></asp:Login>
+
                 </div>
             </section>
         </div>

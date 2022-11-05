@@ -21,6 +21,20 @@
             <div style="margin-left: 80px">
                 <asp:Button ID="ButtonCrearUsuario" runat="server" OnClick="CrearUsuario_Click" Text="Crear Usuario" Width="168px" ForeColor="Black" CssClass="btn-default" /> 
             </div>
+            <div style="padding: 1%;">
+                <asp:Label ID="LabelPermisosUsuarios" runat="server" Text="Para manejar los perfiles de los usuarios, seleccione el siguiente boton"></asp:Label>
+                <br />
+            </div>
+            <div style="margin-left: 80px">
+                <asp:Button ID="ButtonAdministarUsuarios" runat="server" Text="Administrar Usuarios" Width="168px" ForeColor="Black" CssClass="btn-default" OnClick="ButtonAdministarUsuarios_Click" /> 
+            </div>
+            <div style="padding: 1%;">
+                <asp:Label ID="Label2" runat="server" Text="Para manejar los perfiles de los usuarios, seleccione el siguiente boton"></asp:Label>
+                <br />
+            </div>
+            <div style="margin-left: 80px">
+                <asp:Button ID="ButtonAdministrarPermisos" runat="server" Text="Administar Perfiles" Width="168px" ForeColor="Black" CssClass="btn-default" OnClick="ButtonAdministrarPermisos_Click" /> 
+            </div>
         <br />
     </div>
 

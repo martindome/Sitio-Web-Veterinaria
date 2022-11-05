@@ -12,6 +12,21 @@ namespace DAL
     {
         Acceso_DAL ac = new Acceso_DAL();
         Integridad_DAL pIntegridad = new Integridad_DAL();
+
+        public List<Usuario_BE> Listar_Usuarios()
+        {
+            List<Usuario_BE> usuarios = new List<Usuario_BE>();
+
+            DataTable Tabla = ac.EjecutarStoredProcedure("listar_usuarios", null);
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                Usuario_BE usuario = new Usuario_BE();
+                usuario.Usuario = reg["usuario"].ToString();
+                usuarios.Add(usuario);
+            }
+            return usuarios;
+        }
+
         public Usuario_BE loguear(string usuario, string contraseña)
         {
 
@@ -268,6 +283,52 @@ namespace DAL
 
             }
             return usuarioBE;
+        }
+
+        public void cambiar_perfil(string usuario, int perfil)
+        {
+            SqlParameter[] parametros = new SqlParameter[2];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@usu";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = usuario;
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@tipo_usuario";
+            parametros[1].DbType = DbType.Int16;
+            parametros[1].Value = perfil;
+
+            DataTable Tabla = ac.EjecutarStoredProcedure("cambiar_perfil", parametros);
+
+            int id = 0;
+            string pass = "";
+            string nombre = "";
+            int bloqueado = 0;
+            int tipo_usuario = 0;
+
+            foreach (DataRow reg in Tabla.Rows)
+            {
+                id = Convert.ToInt32(reg["id"].ToString());
+                tipo_usuario = Convert.ToInt32(reg["tipo_usuario"].ToString());
+                bloqueado = Convert.ToInt32(reg["bloqueado"].ToString());
+                pass = reg["contraseña"].ToString();
+                nombre = reg["nombre"].ToString();
+            }
+            string cadena = id.ToString() + usuario + pass + nombre + bloqueado.ToString() + tipo_usuario.ToString();
+
+
+            parametros = new SqlParameter[2];
+            parametros[0] = new SqlParameter();
+            parametros[0].ParameterName = "@id";
+            parametros[0].DbType = DbType.String;
+            parametros[0].Value = id;
+
+            parametros[1] = new SqlParameter();
+            parametros[1].ParameterName = "@dvh";
+            parametros[1].DbType = DbType.String;
+            parametros[1].Value = pIntegridad.CalcularDVH(cadena);
+
+            Tabla = ac.EjecutarStoredProcedure("update_usuario_dvh", parametros);
+            pIntegridad.GuardarDigitoVerificador(pIntegridad.ObtenerDVHs("Usuario"), "Usuario");
         }
 
         public void blanquear_password(string usuario)

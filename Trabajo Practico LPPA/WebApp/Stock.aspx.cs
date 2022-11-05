@@ -13,6 +13,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+using System.Threading.Tasks;
 
 namespace WebApp
 {
@@ -137,7 +138,7 @@ namespace WebApp
             try {
                 foreach (var file in FileUpload1.PostedFiles)
                 {
-                    Response.Write(file.FileName + " - " + file.ContentLength + " Bytes. <br />");
+                    //Response.Write(file.FileName + " - " + file.ContentLength + " Bytes. <br />");
                     using (Producto_BLL p = new Producto_BLL())
                     {
                         List<Producto_BE> productos = p.Listar_Productos();
@@ -185,6 +186,11 @@ namespace WebApp
                                 p.Dispose();
                             }
                         }
+                        //borramos archivo
+                        string path = Server.MapPath("~/temp.xml");
+                        FileInfo borrarArchivo = new FileInfo(path);
+                        //file.Delete();
+                        var deletionTask = Task.Run(() => borrarArchivo.Delete());
                     }
                 }
             }

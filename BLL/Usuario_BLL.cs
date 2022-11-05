@@ -13,6 +13,11 @@ namespace BLL
     {
         Usuario_DAL mapper = new Usuario_DAL();
 
+        public List<Usuario_BE> ListarUsuarios()
+        {
+            return mapper.Listar_Usuarios();
+        }
+
         public Usuario_BE Verificar_Usuario(string usuario, string contraseña)
         {
             return mapper.loguear(usuario, contraseña);
@@ -57,6 +62,11 @@ namespace BLL
         public void blanquear_password(string usuario)
         {
              mapper.blanquear_password(usuario);
+        }
+
+        public void CambiarPerfil(string usuario, int tipo_usuario)
+        {
+            mapper.cambiar_perfil(usuario, tipo_usuario);
         }
 
         public bool TakeDB(string filename, string dire)
