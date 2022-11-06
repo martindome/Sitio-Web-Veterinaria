@@ -102,41 +102,16 @@ namespace WebApp
                     Session["carrito"] = null;
                 }
                 Usuario_BE usuario = (Usuario_BE)Session["usuario"];
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Comprar")))
+                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Compras")))
                 {
                     productos.Visible = true;
                     carrito.Visible = true;
                 }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Consultar")))
-                {
-                    productos.Visible = true;
-                }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Agregar Item")))
+                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Stock")))
                 {
                     stock.Visible = true;
                 }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Borrar Item")))
-                {
-                    stock.Visible = true;
-                }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Cancelar Compra")))
-                {
-                    productos.Visible = true;
-                    carrito.Visible = true;
-                }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Backup")))
-                {
-                    admin.Visible = true;
-                }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Restore")))
-                {
-                    admin.Visible = true;
-                }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Desbloqueo de usuario")))
-                {
-                    admin.Visible = true;
-                }
-                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Ver Bitacora")))
+                if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Administrador")))
                 {
                     admin.Visible = true;
                 }

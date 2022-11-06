@@ -65,10 +65,6 @@ namespace WebApp
                 usuarioRespuesta = (Usuario_BE)Session["usuario"];
                 Label1.Text = "Bienvenido " + usuarioRespuesta.Nombre + " Usted tiene permisos de: " + usuarioRespuesta.TipoUsuario.tipo_usuario;
 
-                if (usuarioRespuesta == null || usuarioRespuesta.TipoUsuario.id != 1)
-                {
-                    Response.Redirect("Default.aspx");
-                }
                 ListBoxPermisosUsuario.Items.Clear();
                 foreach (Accion_BE accion in usuarioRespuesta.TipoUsuario.listaAcciones)
                 {

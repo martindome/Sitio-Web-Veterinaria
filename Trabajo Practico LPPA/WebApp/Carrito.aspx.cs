@@ -112,9 +112,6 @@ namespace WebApp
         {
             if (Session["usuario"] == null)
             {
-                Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
-                string detalle = "Compra realizada correctamento por: " + ((Usuario_BE)Session["usuario"]).Usuario;
-                bitacoraBLL.LLenar_Bitacora(((Usuario_BE)Session["usuario"]).IdUsuario, detalle);
                 Response.Redirect("Login.aspx");
             }
             else

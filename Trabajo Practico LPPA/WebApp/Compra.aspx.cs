@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
 using BE.Composite;
+using BLL;
 
 namespace WebApp
 {
@@ -22,7 +23,13 @@ namespace WebApp
                     Response.Redirect("Default.aspx");
                 }
             }
-
+            else
+            {
+                Response.Redirect("/Default.aspx");
+            }
+            Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
+            string detalle = "Compra realizada correctamento por: " + ((Usuario_BE)Session["usuario"]).Usuario;
+            bitacoraBLL.LLenar_Bitacora(((Usuario_BE)Session["usuario"]).IdUsuario, detalle);
             string rawId = Request.QueryString["idVenta"];
             int Id;
             if (!String.IsNullOrEmpty(rawId) && int.TryParse(rawId, out Id))

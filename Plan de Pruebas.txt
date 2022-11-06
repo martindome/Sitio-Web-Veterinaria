@@ -1,16 +1,18 @@
 Ejecutar el script de creacion de la base de datos
 
 A) Login
-1- Loguearse con el usuario admin password Password1234!
+1- Loguearse con el usuario cliente password Password1234!
 2- Mostrar productos y agregar al carrito, modificar o eliminar productos. intentar agregar el mismo 
 productos 2 veces.
-3- apretar el boton de venta y ver e
+3- apretar el boton de venta y ver el id de venta (hacer la compra para que se vea en la bitacora)
+4- Desloguear
 
 B) Bitacora, XML Escritura, API AJAX y Filtros de busqueda
-1- Ir a la pagina de administracion /Admin.aspx
-2- Scrollear hasta Bitacora
-3- Mostrar busqueda en textbox y datepickers con AJAX (mostrar codigo)
-4- Mostrar 2 XML distintos
+1- Loguear con admin password Password1234!
+2- Ir a la pagina de administracion /Admin.aspx
+3- Scrollear hasta Bitacora
+4- Mostrar busqueda en textbox y datepickers con AJAX (mostrar codigo)
+5- Mostrar 2 XML distintos
 
 C) Backup:
 1- Ir a la pagina de administracion /Admin.aspx
@@ -23,7 +25,7 @@ D) Verificacion de integridad
 2- Entrar a MSSQLMS o Azure Data Studio
 3- Modificar la tabla Bitacora, el detalle en el id 15. Podes correr:
 UPDATE Bitacora
-SET detalle = "modificado"
+SET detalle = 'modificado'
 WHERE id = 15
 4- Al debuggear de nuevo, deberia aparecer que la aplicacion no anda. Sin informacion del problema
 5- Loggearse con usuario cliente password Password1234! no deberia dejar hacer nada
@@ -54,6 +56,7 @@ G) ABM simple y XML Descarga
 6- Cambiar el precio de un producto
 7- Agregar un producto con textbox
 8- Agregar varios productos con el xml productos.xml
+9- Mostrar web service
 
 H) Usuario, Familia, Patente (con composite)
 1- Mostar codigo de composite
