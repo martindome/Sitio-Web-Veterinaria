@@ -2,6 +2,10 @@ Para poder guardar el backuop en la carpeta, tenes que agregar el usuario "Todos
 
 Para evitar que los validators no te dejen salir de una pagina o hacer otra cosa que no tiene que ver con eso, agregarle a los textbox, validators y buttons de validacion el tag ValidationGroup="Guardar"
 
+Para poder correr el web method de javascript, tenes que comment la linea //settings.AutoRedirectMode = RedirectMode.Permanent; en RouteConfig.cs
+
+Para poder correr un web service, agregar la referencia al proyecto y despues la podes usar.
+
 git log --decorate --oneline --tags --no-walk --> para ver solo los commits tag
 git log --decorate --oneline --tags --graph --> para ver el path de commits        
 
