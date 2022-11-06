@@ -1,3 +1,5 @@
+Para poder guardar el backuop en la carpeta, tenes que agregar el usuario "Todos" en la seguridad y darle control total
+
 Para evitar que los validators no te dejen salir de una pagina o hacer otra cosa que no tiene que ver con eso, agregarle a los textbox, validators y buttons de validacion el tag ValidationGroup="Guardar"
 
 git log --decorate --oneline --tags --no-walk --> para ver solo los commits tag
