@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using BE;
+using BE.Composite;
 using BLL;
 using System.IO;
 
@@ -33,7 +34,7 @@ namespace WebApp
             productos.Visible = false;
 
             usuarioRespuesta = (Usuario_BE)Session["usuario"];
-            if (usuarioRespuesta == null || usuarioRespuesta.TipoUsuario.id != 1)
+            if (usuarioRespuesta == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.listaAcciones.Any(x => ((Accion_BE)x).detalle == "BackupRestore")))
             {
                 Response.Redirect("Default.aspx");
             }

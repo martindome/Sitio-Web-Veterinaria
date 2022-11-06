@@ -41,3 +41,16 @@ Webservices
  [ ] Árbol de navegacion
 
  [ ] Tipo de encriptacion
+
+
+BL, entities and DAL
+The purpose of the BL is to implement the domain logic that work with domain entities. The definition of these entities is business driven.
+
+The purpose of the DAL is then to organise the persistence of the domain entities. The idea is to hide from the upper layers the ugly details of the data access and the database. If it's well done, you could change the database under the surface, and still leave the higher layers unchanged.
+
+Unsurprisingly, the domain entities are shared across both layers: BL needs them to carry out domain activities, but DAL needs them to organise their persistence.
+
+Decouple BL and DAL ?
+Decoupling components is generally a very good idea. However, layers are not independent components. Layers are a logical groupings of related classes.
+
+If fact , you could as well redraw your layer diagram, and imagine a layer between BL and DAL that contains the Entities. And all the sudden, the layers would appear clean and decoupled.

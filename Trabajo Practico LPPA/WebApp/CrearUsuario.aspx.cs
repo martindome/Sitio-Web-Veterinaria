@@ -19,7 +19,7 @@ namespace WebApp
         {
             if (!IsPostBack)
             {
-                if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1))
+                if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.listaAcciones.Any(x => ((Accion_BE)x).detalle == "CrearUsuario")))
                 {
                     //Sacamos controles de navegacion
                     Response.Redirect("Default.aspx");
@@ -27,11 +27,9 @@ namespace WebApp
                 List<TipoUsuario_BE> permisos = permisosBLL.ListarPermisos();
                 foreach(TipoUsuario_BE permiso in permisos)
                 {
-                    RadioButtonTipo.Items.Add(new ListItem(permiso.tipo_usuario, permiso.id.ToString()));
+                    GridView2.Items.Add(permiso.tipo_usuario);
                 }
             }
-            
-
         }
 
         protected void Button1_Click(object o, EventArgs e)
@@ -39,7 +37,7 @@ namespace WebApp
             if (IsValid)
             {
                 usuarioBE = usuarioBLL.Verificar_Usuario_sinpassword(TextBoxUsername.Text);
-                if (string.IsNullOrEmpty(usuarioBE.Usuario))
+                if (string.IsNullOrEmpty(usuarioBE.Usuario) && GridView2.SelectedValue != "")
                 {
                     usuarioBE = new Usuario_BE();
                     usuarioBE.Nombre = TextBoxNombre.Text;
@@ -47,24 +45,13 @@ namespace WebApp
                     usuarioBE.Contraseña = TextBoxPassword.Text;
                     usuarioBE.Bloqueado = 0;
                     usuarioBE.TipoUsuario = new TipoUsuario_BE();
-                    switch (RadioButtonTipo.SelectedItem.Text)
-                    {
-                        case "Webmaster":
-                            usuarioBE.TipoUsuario.id =1;
-                            break;
-                        case "Control Stock":
-                            usuarioBE.TipoUsuario.id=3;
-                            break;
-                        case "Cliente":
-                            usuarioBE.TipoUsuario.id = 2;
-                            break;
-                    }
+                    usuarioBE.TipoUsuario.id = permisosBLL.ListarPermisos().FirstOrDefault(x => x.tipo_usuario == GridView2.SelectedValue).id;
                     usuarioBLL.Registar_Usuario_Admin(usuarioBE);
 
                     Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
                     string detalle = "Registro - Usuario: " + usuarioBE.Usuario;
                     bitacoraBLL.LLenar_Bitacora(0, detalle);
-                    Response.Redirect("Admin.aspx");
+                    Label1.Text = "Usuario creado con exito";
                 }
                 else
                 {
@@ -72,6 +59,11 @@ namespace WebApp
                     Label1.Visible = true;
                 }
             }
+        }
+
+        protected void ButtonSalir_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Admin.aspx");
         }
     }
 }

@@ -50,7 +50,7 @@ namespace WebApp
             productos.Visible = false;
 
             if (!IsPostBack) {
-                if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1))
+                if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.listaAcciones.Any(x => ((Accion_BE)x).detalle == "Administrador")))
                 {
                     //Sacamos controles de navegacion
                     Response.Redirect("Default.aspx");

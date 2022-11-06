@@ -22,7 +22,7 @@ namespace WebApp
             if (Session["usuario"]!= null)
             {
                 Usuario_BE usuario = (Usuario_BE)Session["usuario"];
-                if (!(usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Comprar")))
+                if (!(usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Compras")))
                 {
                     Session["carrito"] = null;
                     Response.Redirect("Default.aspx");

@@ -15,7 +15,8 @@ namespace WebApp
         Permisos_BLL mapperPermisos = new Permisos_BLL();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1) )
+            //if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1) )
+            if (Session["usuario"] == null || !(((Usuario_BE)Session["usuario"]).TipoUsuario.listaAcciones.Any(x => ((Accion_BE)x).detalle == "AdministrarPerfiles")))
             {
                 //Sacamos controles de navegacion
                 Response.Redirect("Default.aspx");

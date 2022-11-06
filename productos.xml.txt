@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<productos>
+  <producto>
+    <nombre>Alimento para perros 10KG</nombre>
+    <precio>1000</precio>
+    <marca>Dogi</marca>
+    <tipo>Comida</tipo>
+  </producto>
+  <producto>
+    <nombre>Cuna gatos duerme si</nombre>
+    <precio>2000</precio>
+    <marca>Dogi</marca>
+    <tipo>Mueble</tipo>
+ </producto>
+ <producto>
+    <nombre>Rascador rasca si</nombre>
+    <precio>2500</precio>
+    <marca>Dogi</marca>
+    <tipo>Accesorio</tipo>
+  </producto>
+</productos>

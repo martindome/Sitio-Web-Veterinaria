@@ -1,0 +1,63 @@
+Ejecutar el script de creacion de la base de datos
+
+A) Login
+1- Loguearse con el usuario admin password Password1234!
+2- Mostrar productos y agregar al carrito, modificar o eliminar productos. intentar agregar el mismo 
+productos 2 veces.
+3- apretar el boton de venta y ver e
+
+B) Bitacora, XML Escritura, API AJAX y Filtros de busqueda
+1- Ir a la pagina de administracion /Admin.aspx
+2- Scrollear hasta Bitacora
+3- Mostrar busqueda en textbox y datepickers con AJAX (mostrar codigo)
+4- Mostrar 2 XML distintos
+
+C) Backup:
+1- Ir a la pagina de administracion /Admin.aspx
+2- Scrollear hasta backup
+3- Realizar backup y ponerle de nombre "backupprueba"
+4- Mostrar el archivo .bak que se guarda en \Codigo\Trabajo Practico LPPA\WebApp\Backups
+
+D) Verificacion de integridad
+1- Desloguarse
+2- Entrar a MSSQLMS o Azure Data Studio
+3- Modificar la tabla Bitacora, el detalle en el id 15. Podes correr:
+UPDATE Bitacora
+SET detalle = "modificado"
+WHERE id = 15
+4- Al debuggear de nuevo, deberia aparecer que la aplicacion no anda. Sin informacion del problema
+5- Loggearse con usuario cliente password Password1234! no deberia dejar hacer nada
+6- Loguearse con el usuario admin password Password1234!
+7- Scrollear hasta integridad, deberia aparecer informacion sobre los registros en problemas
+8- Seleccionar "Restablecer digitos" para recalcular y guardar los digitos verificadores
+9- Ahora deberia dejar usar la pagina. Volver a debuggear
+
+E) Restore
+1- Loguearse con el usuario admin password Password1234!
+2- Ir a la pagina de administracion /Admin.aspx
+3- Ir a backup
+4- Ir a restore
+5- Seleccionar el archivo creado en C) backupprueba
+
+F) Bloqueo
+1- Loggear a cliente pero con con el password asd 3 veces
+2- Mostar que con la password correcta, no se puede loguar
+3- logear con admin e ir a la pagina de administracion
+4- Scrollear a desbloqueo, seleccionar cliente y desbloquear
+
+G) ABM simple y XML Descarga
+1- Loguear con admin e ir a Crear Usuario
+2- Crear un usuario nuevoadmin / Nuevo Admin / Password1234!
+3- Desloguear y loguear con el nuevo usuario
+4- Ir a Stock
+5- Borrar un producto con el checkbox
+6- Cambiar el precio de un producto
+7- Agregar un producto con textbox
+8- Agregar varios productos con el xml productos.xml
+
+H) Usuario, Familia, Patente (con composite)
+1- Mostar codigo de composite
+2- Loguear con admin e ir a Administrar usuario
+3- Ir a Admin, luego administrar perfiles y mostrarlo
+
+

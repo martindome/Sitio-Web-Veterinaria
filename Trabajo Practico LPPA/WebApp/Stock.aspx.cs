@@ -25,7 +25,7 @@ namespace WebApp
             if (Session["usuario"] != null)
             {
                 Usuario_BE usuario = (Usuario_BE)Session["usuario"];
-                if (! ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Agregar Item"))) && !((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Borrar Item"))))
+                if (!(((Usuario_BE)Session["usuario"]).TipoUsuario.listaAcciones.Any(x => ((Accion_BE)x).detalle == "Stock")))
                 {
                     Response.Redirect("Default.aspx");
                 }

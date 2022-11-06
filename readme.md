@@ -1,3 +1,5 @@
+Para evitar que los validators no te dejen salir de una pagina o hacer otra cosa que no tiene que ver con eso, agregarle a los textbox, validators y buttons de validacion el tag ValidationGroup="Guardar"
+
 git log --decorate --oneline --tags --no-walk --> para ver solo los commits tag
 git log --decorate --oneline --tags --graph --> para ver el path de commits        
 

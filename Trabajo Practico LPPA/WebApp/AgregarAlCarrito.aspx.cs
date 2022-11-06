@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BE;
+using BE.Composite;
 using BLL;
 
 namespace WebApp
@@ -14,6 +15,16 @@ namespace WebApp
         Carrito_BLL pCarrito = new Carrito_BLL(); 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] != null)
+            {
+                Usuario_BE usuario = (Usuario_BE)Session["usuario"];
+                if (!(((Usuario_BE)Session["usuario"]).TipoUsuario.listaAcciones.Any(x => ((Accion_BE)x).detalle == "Compras")))
+                {
+                    Session["carrito"] = null;
+                    Response.Redirect("Default.aspx");
+                }
+            }
+            //Se puede agregar al carro sin estar logueado
             if (Session["Carrito"] == null)
             {
                 Session["Carrito"] = new Carrito_BE();
