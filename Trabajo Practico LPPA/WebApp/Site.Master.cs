@@ -40,6 +40,13 @@ namespace WebApp
                     Session["Registros"] = new List<Registro_BE>();
                 }
             }
+            else
+            {
+                if(((List<Registro_BE>)Session["Registros"]).Count > 0)
+                {
+                    Response.Redirect("FalloIntegridad.aspx");
+                }
+            }
 
 
             //Sacamos controles de navegacion
