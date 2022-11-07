@@ -73,7 +73,7 @@ namespace WebApp
                     {
                         Response.Cookies["UserName"].Expires = DateTime.Now.AddDays(-1);
                     }
-                    if (usuarioBE.TipoUsuario.id == 1)
+                    if (usuarioBE.TipoUsuario.listaAcciones.Any(x => ((Accion_BE)x).detalle == "Administrador"))
                     {
                         Response.Redirect("Admin.aspx");
                     }
