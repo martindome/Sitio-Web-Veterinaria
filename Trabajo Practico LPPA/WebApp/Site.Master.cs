@@ -94,13 +94,13 @@ namespace WebApp
                 LogString = "Cerrar Sesion";
                 User = ((Usuario_BE)Session["usuario"]).Usuario;
                 user.Visible = true;
-                if (((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1)
-                {
-                    //Sacamos controles de navegacion
-                    admin.Visible = true;
-                    login.Visible = true;
-                    Session["carrito"] = null;
-                }
+                //if (((Usuario_BE)Session["usuario"]).TipoUsuario.id == 1)
+                //{
+                //    //Sacamos controles de navegacion
+                //    admin.Visible = true;
+                //    login.Visible = true;
+                //    Session["carrito"] = null;
+                //}
                 Usuario_BE usuario = (Usuario_BE)Session["usuario"];
                 if ((usuario.TipoUsuario.listaAcciones.Any(item => ((Accion_BE)item).detalle == "Compras")))
                 {
