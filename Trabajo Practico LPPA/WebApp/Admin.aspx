@@ -55,13 +55,13 @@
         <h1 style="background-color: gray;">Digitos Verificadores</h1>
             <div style="padding: 1%;">
                 <asp:GridView ID="GridViewDigitosVerificadores" runat="server" AutoGenerateColumns="false"
-                    Font-Names="Arial" BackColor="#999999" BorderColor="Black" BorderStyle="Dashed" ForeColor="Black">
+                    Font-Names="Arial" BackColor="#999999" BorderColor="Black" BorderStyle="Dashed" ForeColor="Black" CssClass="table-bordered">
                     <Columns>
-                        <asp:BoundField ItemStyle-Width="150px" DataField="Tabla" HeaderText="Tabla" >
-                        <ItemStyle Width="150px"></ItemStyle>
+                        <asp:BoundField ItemStyle-Width="50px" DataField="Tabla" HeaderText="Tabla" >
+                        <ItemStyle Width="50px"></ItemStyle>
                         </asp:BoundField>
-                        <asp:BoundField ItemStyle-Width="100px" DataField="ID_Registro" HeaderText="Registro" >
-                        <ItemStyle Width="100px"></ItemStyle>   
+                        <asp:BoundField ItemStyle-Width="250px" DataField="ID_Registro" HeaderText="Registro" >
+                        <ItemStyle Width="250px"></ItemStyle>   
                         </asp:BoundField>  
                     </Columns>
                         <HeaderStyle BackColor="#999999" BorderColor="Black" />

@@ -62,7 +62,14 @@ namespace WebApp
                     //Llenamos la bitacora
                     Bitacora_BLL bitacoraBLL = new Bitacora_BLL();
                     string detalle = "Inicio de Sesion - Usuario: " + usuarioBE.Usuario;
-                    bitacoraBLL.LLenar_Bitacora(usuarioBE.IdUsuario, detalle);
+                    if (Session["Registros"] != null && (((List<Registro_BE>)Session["Registros"]).Count > 0))
+                    {
+
+                    }
+                    else
+                    {
+                        bitacoraBLL.LLenar_Bitacora(usuarioBE.IdUsuario, detalle);
+                    }
                     if (LoginControl.RememberMeSet)
                     {
 

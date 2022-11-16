@@ -106,6 +106,7 @@ namespace DAL
                     mHashCalculado = CalcularDVH(mRegistroSplit[0]); // -->(Digito Verificador) 6
                     if (mHashCalculado != mRegistroSplit[1])
                     {
+                        mReg.ID_Registro = "El registro " + mReg.ID_Registro + " ha sido modificado";
                         Tablas.Add(mReg);
                     }
                 }
@@ -124,7 +125,7 @@ namespace DAL
                 {
                     Registro_BE mRegisto = new Registro_BE();
                     mRegisto.Tabla = mDigitoVerificador.Tabla;
-                    mRegisto.ID_Registro = "DVV";
+                    mRegisto.ID_Registro = "Error de DVV en tabla: " + mDigitoVerificador.Tabla + " (Registros eliminados o agregados)";
                     Tablas.Add(mRegisto);
                 }
             }
