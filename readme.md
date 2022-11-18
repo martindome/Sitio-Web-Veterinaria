@@ -19,7 +19,9 @@ git log --decorate --oneline --tags --graph --> para ver el path de commits
 	https://www.aspsnippets.com/Articles/Call-Server-Side-function-from-JavaScript-without-PostBack-in-ASPNet.aspx#:~:text=and%20VB.Net.-,In%20order%20to%20call%20a%20Server%20Side%20function%20from%20JavaScript,without%20PostBack%20in%20ASP.Net. Como correr desde client un metodo (sin ajax)
 
 
-
+Para crear menus desplegables: 
+	https://www.w3schools.com/howto/howto_css_subnav.asp
+	https://www.youtube.com/watch?v=-HX-bhp5gvI
 
 # Universidad Abierta Interamericana
 
